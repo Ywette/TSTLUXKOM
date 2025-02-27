@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { HandshakeIcon } from 'lucide-react';
+import { Handshake } from 'lucide-react';
 
 
 const partners = [
@@ -65,7 +65,7 @@ export default function Partners() {
               />
               {hoveredPartner === index && (
                 <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-300 opacity-100 z-50 bg-white p-2 rounded-full shadow-lg">
-                  <HandshakeIcon className="h-8 w-8 text-blue-600 animate-bounce" />
+                  <Handshake className="h-8 w-8 text-blue-600 animate-bounce" />
                 </div>
               )}
             </div>
