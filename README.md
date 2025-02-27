@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -108,3 +109,7 @@ PICTURES
 4 services 
 1 hero section
 pictures for every services description separately (+4 in total as minimum)
+=======
+# tstluxcom
+TST LUXKOM web page
+>>>>>>> dcc8c028254885de714c5f7b61605985b512496f
