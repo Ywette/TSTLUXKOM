@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* <div className="flex-grow">
         {children}
       </div> */}
-      <main className="flex-1 mt-[132px]"> {/* flex-1 will make it take remaining space */}
+      <main className="flex-1 mt-[88px] sm:mt-[100px] lg:mt-[132px]"> {/* Responsive margin top */}
         {children}
       </main>
     </div>
