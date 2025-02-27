@@ -5,19 +5,12 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**', // Allows all HTTPS domains (less secure but flexible)
+        hostname: '**', // Allows all HTTPS domains
       }
     ],
-    // OR list specific domains:
-    domains: [
-      'connectivity.esa.int/',
-      'cdn.public.lu/',
-      'ses-techcom.com',
-      'tstgroup.de',
-      // Add as many as needed
-    ], 
+    // Remove the domains array since it's redundant with remotePatterns
+    // and has formatting issues
   },
-  /* config options here */
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

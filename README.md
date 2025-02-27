@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+# TSTLUXKOM
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -36,8 +37,8 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## BASIC INITIAL PLAN (CREATED WITH CLAUDE)
 
-BASIC INITIAL PLAN (CREATED WITH CLAUDE)
 Week 1: Core Development
 - Project setup with Next.js, TypeScript, Tailwind
 - Services data structure implementation
@@ -62,54 +63,44 @@ Week 4: Animations & Enhancement
 - Scroll animations
 - Performance optimization
 - Final testing & deployment
--------------------------------------------------------------
-Week 1 Detailed Plan:
-Day 1-2: Setup & Structure
 
-(done) Initialize Next.js project with TypeScript
-(done) Configure Tailwind CSS
-(done) Set up folder structure
-(done) Create services.ts data file
-(done) Implement basic routing
+## Week 1 Detailed Plan:
+
+Day 1-2: Setup & Structure
+- (done) Initialize Next.js project with TypeScript
+- (done) Configure Tailwind CSS
+- (done) Set up folder structure
+- (done) Create services.ts data file
+- (done) Implement basic routing
 
 Day 3-4: Navigation & Layout
-
-Build responsive navbar with dropdown
-(done) Create layout components
-(done) Implement header and footer
-Style main containers
-Mobile menu functionality
+- Build responsive navbar with dropdown (done)
+- Create layout components (done)
+- Implement header and footer
+- Style main containers
+- Mobile menu functionality
 
 Day 5: Service Components
-
-Build service card components
-Create service list view
-Implement service detail page template
-Connect services.ts data
-Style service sections
+- Build service card components
+- Create service list view
+- Implement service detail page template
+- Connect services.ts data
+- Style service sections
 
 Quality Gates:
+- Responsive on all devices
+- Clean component structure
+- Type safety
+- Loading performance
+- Accessibility compliance
 
-Responsive on all devices
-Clean component structure
-Type safety
-Loading performance
-Accessibility compliance
+## COLOR DEFINITIONS
+- primary color: dark blue for overall background: bg-blue-950
+- secondary color: blue
+- letter color: white
+- primary button: yellow
+- secondary button: light blue
 
-COLOR DEFINITIONS
------------------
-primary color: dark blue for overall background: bg-blue-950
-secondary color: blue
-letter color: white
-primary button: yellow
-secondary button: light blue
-
-PICTURES
------------------
-4 services 
-1 hero section
-pictures for every services description separately (+4 in total as minimum)
-=======
-# tstluxcom
-TST LUXKOM web page
->>>>>>> dcc8c028254885de714c5f7b61605985b512496f
+## PICTURES
+4 services
+1 hero section pictures for every services description separately (+4 in total as minimum)
