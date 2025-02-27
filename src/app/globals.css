@@ -3,19 +3,59 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base colors */
+  --bg-primary: #001F3F;
+  --bg-secondary: #0047AB;
+  
+  /* Accent colors */
+  --accent-highlight: #FF6EC7;
+  --accent-success: #00FF9F;
+  
+  /* UI State colors */
+  --ui-warning: #FFD700;
+  --ui-data: #40E0D0;
+  --ui-info: #9370DB;
+  
+  /* Text colors */
+  --text-on-dark: rgba(255, 255, 255, 0.95);
+  --text-on-light: rgba(0, 31, 63, 0.95);
+  
+  /* Gradient */
+  --gradient-primary: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.main-container {
+  background-color: var(--bg-primary);
+  color: var(--text-on-dark);
+}
+
+.highlight-button {
+  background-color: var(--accent-highlight);
+  color: var(--text-on-dark);
+}
+
+.data-visualization {
+  background-color: var(--ui-data);
+}
+
+.warning-message {
+  background-color: var(--ui-warning);
+  color: var(--text-on-light);
+}
+
+.gradient-header {
+  background: var(--gradient-primary);
+}
+
+@keyframes wave {
+  from {
+    transform: translateY(100%) rotate(45deg);
+  }
+  to {
+    transform: translateY(-100%) rotate(45deg);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.wave-animation {
+  animation: wave 2s linear infinite;
 }

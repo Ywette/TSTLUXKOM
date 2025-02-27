@@ -9,10 +9,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
+        'primary': '#001F3F',      // Navy Blue
+        'secondary': '#0047AB',    // Royal Blue
+        'text-light': 'rgba(255, 255, 255, 0.95)',
+      }
+    }
   },
   plugins: [],
 } satisfies Config;
