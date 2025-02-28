@@ -5,8 +5,8 @@ import { ServicesList } from "@/components/ServicesList";
 
 export default function Home() {
   return (
-    <div className="pt-0 px-24">
-      <main className="flex flex-grow flex-col">
+    <div className="flex flex-col w-full">
+      <main className="flex flex-col w-full">
         <HeroSection />
         <Mission />
         <ServicesList />

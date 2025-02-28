@@ -43,35 +43,47 @@ export default function Partners() {
   console.log('Current hovered partner:', hoveredPartner); // Debug state
  
   return (
-    <section id="partners" className="flex flex-wrap justify-center items-center pt-24 h-screen">
-      {partners.map((partner, index) => (
-        <div
-          key={index}
-          className="relative mr-20 mb-20"
-          onMouseEnter={() => {
-            console.log('Hovering partner:', index); // Debug hover
-            setHoveredPartner(index);
-          }}
-          onMouseLeave={() => setHoveredPartner(null)}
-        >
-          <Link href={partner.url} target="_blank">
-            <div className="relative">
-              <Image
-                src={partner.img}
-                alt={partner.alt}
-                width={200}
-                height={100}
-                className="object-contain"
-              />
-              {hoveredPartner === index && (
-                <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-300 opacity-100 z-50 bg-white p-2 rounded-full shadow-lg">
-                  <Handshake className="h-8 w-8 text-blue-600 animate-bounce" />
-                </div>
-              )}
-            </div>
-          </Link>
+    <div className="relative w-full overflow-hidden">
+      {/* Top transition gradient */}
+      <div className="h-32 bg-gradient-to-b from-primary to-white" />
+      
+      <section id="partners" className="bg-white">
+        <div className="flex flex-col items-center py-24">
+          <h2 className="text-3xl font-bold text-primary mb-16">Our Partners</h2>
+          <div className="flex items-center justify-center gap-32 max-w-7xl mx-auto px-8">
+            {partners.map((partner, index) => (
+              <div
+                key={index}
+                className="relative w-[200px] h-[100px] flex items-center justify-center"
+                onMouseEnter={() => setHoveredPartner(index)}
+                onMouseLeave={() => setHoveredPartner(null)}
+              >
+                <Link href={partner.url} target="_blank" className="w-full h-full flex items-center justify-center">
+                  <div className="relative group w-full h-full flex items-center justify-center">
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      <Image
+                        src={partner.img}
+                        alt={partner.alt}
+                        width={160}
+                        height={80}
+                        className="object-contain max-w-full max-h-full transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                    {hoveredPartner === index && (
+                      <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 transition-all duration-300 opacity-100 z-50 bg-white p-2 rounded-full shadow-lg">
+                        <Handshake className="h-8 w-8 text-primary animate-bounce" />
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </section>
+      </section>
+
+      {/* Bottom transition gradient */}
+      <div className="h-32 bg-gradient-to-b from-white to-primary" />
+    </div>
   );
  }

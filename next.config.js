@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'export',  // Enable static exports
-    basePath: '/TSTLUXKOM', // Your repository name
-    assetPrefix: '/TSTLUXKOM/',
+    basePath: process.env.NODE_ENV === 'production' ? '/TSTLUXKOM' : '',
+    assetPrefix: process.env.NODE_ENV === 'production' ? '/TSTLUXKOM/' : '',
     trailingSlash: true,
     images: {
         unoptimized: true, // Required for static export
