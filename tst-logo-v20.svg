@@ -1,0 +1,56 @@
+<svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="fadeMask">
+      <rect x="0" y="0" width="600" height="200" fill="white"/>
+      <rect x="0" y="0" width="600" height="200">
+        <animate attributeName="y" values="200;0" dur="3s" repeatCount="indefinite"/>
+      </rect>
+    </mask>
+    
+    <mask id="fadeMaskFast">
+      <rect x="0" y="0" width="600" height="200" fill="white"/>
+      <rect x="0" y="0" width="600" height="200">
+        <animate attributeName="y" values="200;0" dur="2s" repeatCount="indefinite"/>
+      </rect>
+    </mask>
+  </defs>
+
+  <!-- Ground Network with Dish -->
+  <circle cx="100" cy="100" r="4" fill="#1a365d"/>
+  <path d="M60 100 L140 100" stroke="#1a365d" stroke-width="2"/>
+  <path d="M60 100 C 100 130, 140 100, 140 100" 
+        fill="none" 
+        stroke="#1a365d" 
+        stroke-width="2"/>
+  <circle cx="60" cy="100" r="3" fill="#1a365d"/>
+  <circle cx="140" cy="100" r="3" fill="#1a365d"/>
+  
+  <!-- Blue waves -->
+  <g mask="url(#fadeMask)">
+    <path d="M100 100 Q 50 90, 100 80 Q 150 70, 100 60 Q 50 50, 100 40" 
+          fill="none" stroke="#2563eb" stroke-width="2">
+      <animate attributeName="y" values="0;-60" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M100 100 Q 150 90, 100 80 Q 50 70, 100 60 Q 150 50, 100 40" 
+          fill="none" stroke="#2563eb" stroke-width="2">
+      <animate attributeName="y" values="0;-60" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+    </path>
+  </g>
+  
+  <!-- Pink waves -->
+  <g mask="url(#fadeMaskFast)">
+    <path d="M100 100 Q 85 90, 100 80 Q 115 70, 100 60 Q 85 50, 100 40" 
+          fill="none" stroke="#ec4899" stroke-width="2">
+      <animate attributeName="y" values="0;-60" dur="2s" repeatCount="indefinite" begin="0.3s"/>
+    </path>
+    <path d="M100 100 Q 115 90, 100 80 Q 85 70, 100 60 Q 115 50, 100 40" 
+          fill="none" stroke="#ec4899" stroke-width="2">
+      <animate attributeName="y" values="0;-60" dur="2s" repeatCount="indefinite" begin="0.8s"/>
+    </path>
+  </g>
+  
+  <path d="M100 100 L100 40" stroke="#1a365d" stroke-width="2"/>
+
+  <!-- Company Name -->
+  <text x="180" y="105" font-family="Arial" font-weight="bold" font-size="24" fill="#1a365d">TST LUXKOM</text>
+</svg>
