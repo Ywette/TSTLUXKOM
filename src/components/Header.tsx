@@ -19,7 +19,7 @@ export function Header() {
                 {/* Logo section */}
                 <div className="flex items-center">
                     <Image
-                        src="/tst-logo-v45deg.svg"
+                        src="/TSTLUXKOM/tst-logo-v45deg.svg"
                         alt="TST LUXKOM Logo"
                         priority
                         height={100}
