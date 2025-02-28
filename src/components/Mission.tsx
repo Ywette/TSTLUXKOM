@@ -77,12 +77,8 @@ const Mission: React.FC = () => (
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="text-center mt-16">
-        <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg transition-colors duration-300">
-          Learn More About Our Approach
-        </button>
-      </div>
+      
+      
     </div>
   </div>
 );
