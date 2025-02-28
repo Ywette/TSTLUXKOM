@@ -1,12 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    output: 'export',  // Enable static exports
+    basePath: '/TSTLUXKOM', // Your repository name
     images: {
+        unoptimized: true, // Required for static export
         remotePatterns: [
             {
                 protocol: 'https',
                 hostname: '**', // Allows all HTTPS domains
             }
         ],
+        domains: [
+            'connectivity.esa.int',
+            'cdn.public.lu',
+            'ses-techcom.com',
+            'tstgroup.de'
+        ],
+        unoptimized: true
     },
     webpack(config) {
         config.module.rules.push({
