@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Handshake } from 'lucide-react';
+import { Handshake } from 'lucide-react/dist/esm/icons';
 
 
 const partners = [
