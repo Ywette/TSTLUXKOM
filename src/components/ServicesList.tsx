@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Cog, BarChart3, HeadphonesIcon, Code } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 
 const getIconForService = (serviceId: string) => {
   switch (serviceId) {
@@ -26,12 +27,13 @@ export function ServicesList() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [allCardsVisible, setAllCardsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     // Set all cards visible after a short delay
     const timer = setTimeout(() => {
       setAllCardsVisible(true);
-    }, 1000); // Increased delay to ensure CSS is loaded
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -59,14 +61,14 @@ export function ServicesList() {
         {/* Services Grid */}
         <div 
           ref={containerRef}
-          className={`services-container ${allCardsVisible ? 'all-visible animate-fade-in' : ''}`}
+          className={`services-container ${allCardsVisible ? 'all-visible' : ''}`}
           data-hovered={hoveredCard}
         >
           {services.map((service, index) => (
             <div
               key={service.id}
               className={`
-                service-card
+                service-card group
                 bg-white/5 backdrop-blur-sm rounded-2xl
                 cursor-pointer
                 ${allCardsVisible ? 'opacity-100' : 'opacity-0'}
@@ -79,13 +81,7 @@ export function ServicesList() {
               onMouseEnter={() => setHoveredCard(service.id)}
               onMouseLeave={() => setHoveredCard(null)}
               onClick={() => {
-                const serviceRoutes: { [key: string]: string } = {
-                  "1": "/services/software-development",
-                  "2": "/services/data-analytics",
-                  "3": "/services/customer-support",
-                  "4": "/services/web-development"
-                };
-                window.location.href = serviceRoutes[service.id];
+                router.push(`/services/${service.web}`);
               }}
             >
               <div className="px-8 py-12 h-full flex flex-col">
