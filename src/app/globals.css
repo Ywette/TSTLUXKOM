@@ -2,13 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .service-card {
+    transition: all 0.3s ease-in-out;
+  }
+
+  .service-card:hover {
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Define custom animations */
+  @keyframes flashShadow {
+    0% {
+      box-shadow: 0 0 0 0 rgba(var(--accent-highlight), 0);
+    }
+    50% {
+      box-shadow: 0 0 35px 0 rgba(var(--accent-highlight), 0.8);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(var(--accent-highlight), 0);
+    }
+  }
+
+  .animate-flash-shadow {
+    animation: flashShadow 0.4s ease-in-out;
+  }
+}
+
 :root {
   /* Base colors */
   --bg-primary: #001F3F;
   --bg-secondary: #0047AB;
   
   /* Accent colors */
-  --accent-highlight: #FF6EC7;
+  --accent-highlight: 147, 51, 234; /* Your accent color in RGB */
   --accent-success: #00FF9F;
   
   /* UI State colors */

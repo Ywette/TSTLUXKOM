@@ -72,11 +72,11 @@ export const services: Service[] = [
         picture: "/service4.jpg",
         title: "software development",
         web: "software-development",
-        description: "Define, design, and develop suitable digital applications and facilitate their integration into your digital landscape for a seamless and enjoyable Customer Journey.",
+        description: "Define, design, and develop suitable digital applications and facilitate their integration into your digital landscape.",
         features: [
             "Define your digital application requirements",
             "Create intuitive and user-friendly designs.",
-            "Build robust and scalable digital applications tailored to your requirements.",
+            "Build robust and scalable digital applications.",
             "Application integration in your digital environment"
         ],
         benefits: [

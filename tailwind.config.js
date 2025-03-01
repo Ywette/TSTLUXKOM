@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}"
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -32,4 +32,53 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    'transform',
+    'transition-all',
+    'duration-300',
+    'duration-500',
+    'opacity-0',
+    'opacity-60',
+    'opacity-100',
+    'translate-x-0',
+    'translate-x-25',
+    'translate-x-35',
+    'translate-x-[25%]',
+    'translate-x-[35%]',
+    'translate-x-[-10%]',
+    'translate-x-[-34.5%]',
+    'translate-y-0',
+    'translate-y-8',
+    'z-0',
+    'z-1',
+    'z-2',
+    'z-10',
+    'z-20',
+    'w-[46%]',
+    'ml-[-34.5%]',
+    {
+      pattern: /^hover:/,
+      variants: ['hover'],
+    },
+    {
+      pattern: /^group-hover:/,
+      variants: ['group-hover'],
+    },
+    {
+      pattern: /(from|via|to)-(blue|purple|accent)-(highlight|[0-9]+)/,
+      variants: ['hover'],
+    },
+    {
+      pattern: /shadow-/,
+      variants: ['hover'],
+    },
+    {
+      pattern: /animate-/,
+      variants: ['group-hover'],
+    },
+    {
+      pattern: /border-/,
+      variants: ['hover'],
+    }
+  ],
 } 
