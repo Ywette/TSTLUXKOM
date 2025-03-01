@@ -2,30 +2,156 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
+/* Service Cards Base Styles */
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  position: relative;
+}
+
+.service-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .services-container {
+    height: 600px;
+    overflow: visible;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
   .service-card {
-    transition: all 0.3s ease-in-out;
+    position: absolute;
+    width: 23%;
+    height: 550px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
   }
 
-  .service-card:hover {
-    transition: all 0.3s ease-in-out;
+  .service-card:nth-child(1) { left: 0%; }
+  .service-card:nth-child(2) { left: 25%; }
+  .service-card:nth-child(3) { left: 50%; }
+  .service-card:nth-child(4) { left: 75%; }
+
+  /* Expanded card */
+  .service-card.hovered {
+    width: 45%;
+    z-index: 10;
+    transform: translateZ(0);
   }
 
-  /* Define custom animations */
-  @keyframes flashShadow {
-    0% {
-      box-shadow: 0 0 0 0 rgba(var(--accent-highlight), 0);
-    }
-    50% {
-      box-shadow: 0 0 35px 0 rgba(var(--accent-highlight), 0.8);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(var(--accent-highlight), 0);
-    }
+  /* Set styles for non-hovered cards */
+  .services-container[data-hovered] .service-card:not(.hovered) {
+    opacity: 0.4;
   }
 
-  .animate-flash-shadow {
-    animation: flashShadow 0.4s ease-in-out;
+  .services-container[data-hovered] .service-card:not(.hovered) h3 {
+    color: white;
+  }
+
+  /* First card expansion (to the right) */
+  .services-container[data-hovered="1"] .service-card:nth-child(2) {
+    transform: translateX(65%);
+    z-index: 3;
+  }
+  .services-container[data-hovered="1"] .service-card:nth-child(3) {
+    transform: translateX(35%);
+    z-index: 2;
+  }
+  .services-container[data-hovered="1"] .service-card:nth-child(4) {
+    transform: translateX(0);
+    z-index: 1;
+  }
+
+  /* Second card behavior */
+  .services-container[data-hovered="2"] .service-card.hovered {
+    transform: translateX(0) !important;
+    width: 46%;
+    left: 25%;
+    margin-left: -11.5%;
+  }
+  .services-container[data-hovered="2"] .service-card:nth-child(3) {
+    transform: translateX(25%);
+    z-index: 2;
+  }
+  .services-container[data-hovered="2"] .service-card:nth-child(4) {
+    transform: translateX(0) !important;
+    z-index: 1;
+  }
+
+  /* Third card behavior */
+  .services-container[data-hovered="3"] .service-card.hovered {
+    transform: translateX(35%) !important;
+    width: 46%;
+    left: 50%;
+    margin-left: -34.5%;
+  }
+  .services-container[data-hovered="3"] .service-card:nth-child(2) {
+    transform: translateX(-35%);
+    z-index: 3;
+  }
+  .services-container[data-hovered="3"] .service-card:nth-child(4) {
+    transform: translateX(0) !important;
+    z-index: 1;
+  }
+
+  /* Fourth card expansion (to the left) */
+  .services-container[data-hovered="4"] .service-card.hovered {
+    transform: translateX(-45%) !important;
+  }
+  .services-container[data-hovered="4"] .service-card:nth-child(2) {
+    transform: translateX(-35%);
+    z-index: 2;
+  }
+  .services-container[data-hovered="4"] .service-card:nth-child(3) {
+    transform: translateX(-65%);
+    z-index: 3;
+  }
+
+  /* Card shadow effects */
+  .service-card:not(.hovered) {
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .services-container[data-hovered="4"] .service-card:not(.hovered) {
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Border animation styles */
+  .services-container.all-visible .service-card {
+    animation: none;
+  }
+
+  .services-container.all-visible .service-card:nth-child(1) {
+    animation: flashShadow 0.4s ease-in-out 1.3s;
+  }
+
+  .services-container.all-visible .service-card:nth-child(2) {
+    animation: flashShadow 0.4s ease-in-out 1.5s;
+  }
+
+  .services-container.all-visible .service-card:nth-child(3) {
+    animation: flashShadow 0.4s ease-in-out 1.7s;
+  }
+
+  .services-container.all-visible .service-card:nth-child(4) {
+    animation: flashShadow 0.4s ease-in-out 1.9s;
+  }
+}
+
+/* Animations */
+@keyframes flashShadow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 141, 0);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 77, 141, 0.8);
   }
 }
 
