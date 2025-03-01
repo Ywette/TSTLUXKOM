@@ -15,6 +15,7 @@
   position: relative;
   width: 100%;
   z-index: 1;
+  opacity: 0;
 }
 
 /* Desktop Styles */
@@ -125,33 +126,40 @@
 
   /* Border animation styles */
   .services-container.all-visible .service-card {
+    opacity: 1;
     animation: none;
   }
 
   .services-container.all-visible .service-card:nth-child(1) {
-    animation: flashShadow 0.4s ease-in-out 1.3s;
+    animation: flashShadow 0.4s ease-in-out forwards;
   }
 
   .services-container.all-visible .service-card:nth-child(2) {
-    animation: flashShadow 0.4s ease-in-out 1.5s;
+    animation: flashShadow 0.4s ease-in-out forwards;
   }
 
   .services-container.all-visible .service-card:nth-child(3) {
-    animation: flashShadow 0.4s ease-in-out 1.7s;
+    animation: flashShadow 0.4s ease-in-out forwards;
   }
 
   .services-container.all-visible .service-card:nth-child(4) {
-    animation: flashShadow 0.4s ease-in-out 1.9s;
+    animation: flashShadow 0.4s ease-in-out forwards;
   }
 }
 
 /* Animations */
 @keyframes flashShadow {
-  0%, 100% {
+  0% {
     box-shadow: 0 0 0 0 rgba(255, 77, 141, 0);
+    opacity: 0;
   }
   50% {
     box-shadow: 0 0 35px rgba(255, 77, 141, 0.8);
+    opacity: 1;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 141, 0);
+    opacity: 1;
   }
 }
 

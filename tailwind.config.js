@@ -25,9 +25,14 @@ module.exports = {
             'background-position': 'right center'
           },
         },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        }
       },
       animation: {
         'gradient-x': 'gradient-x 15s ease infinite',
+        'fade-in': 'fade-in 0.5s ease-out forwards',
       },
     },
   },
@@ -56,6 +61,8 @@ module.exports = {
     'z-20',
     'w-[46%]',
     'ml-[-34.5%]',
+    'animate-fade-in',
+    'all-visible',
     {
       pattern: /^hover:/,
       variants: ['hover'],

@@ -23,56 +23,18 @@ const getIconForService = (serviceId: string) => {
 };
 
 export function ServicesList() {
-  const [visibleCards, setVisibleCards] = useState(new Set());
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [allCardsVisible, setAllCardsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const handleCardClick = (serviceId: string) => {
-    const serviceRoutes: { [key: string]: string } = {
-      "1": "/services/software-development",
-      "2": "/services/data-analytics",
-      "3": "/services/customer-support",
-      "4": "/services/web-development"
-    };
-    window.location.href = serviceRoutes[serviceId];
-  };
 
   useEffect(() => {
-    cardRefs.current = cardRefs.current.slice(0, services.length);
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.2,
-    };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const cardId = entry.target.getAttribute('data-card-id');
-          if (cardId) {
-            setVisibleCards(prev => new Set([...prev, cardId]));
-          }
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    cardRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    // Check if all cards are visible
-    if (visibleCards.size === services.length && !allCardsVisible) {
+    // Set all cards visible after a short delay
+    const timer = setTimeout(() => {
       setAllCardsVisible(true);
-    }
-  }, [visibleCards]);
+    }, 1000); // Increased delay to ensure CSS is loaded
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section id="services" className="relative overflow-hidden py-24">
@@ -97,29 +59,36 @@ export function ServicesList() {
         {/* Services Grid */}
         <div 
           ref={containerRef}
-          className={`services-container ${allCardsVisible ? 'all-visible' : ''}`}
+          className={`services-container ${allCardsVisible ? 'all-visible animate-fade-in' : ''}`}
           data-hovered={hoveredCard}
         >
           {services.map((service, index) => (
             <div
               key={service.id}
-              ref={el => cardRefs.current[index] = el}
-              data-card-id={service.id}
               className={`
                 service-card
                 bg-white/5 backdrop-blur-sm rounded-2xl
                 cursor-pointer
-                ${visibleCards.has(service.id) ? 'opacity-100' : 'opacity-0'}
+                ${allCardsVisible ? 'opacity-100' : 'opacity-0'}
                 ${hoveredCard === service.id ? 'hovered' : ''}
               `}
               style={{
-                transitionDelay: hoveredCard ? '0ms' : `${index * 200}ms`
+                transitionDelay: hoveredCard ? '0ms' : `${index * 200}ms`,
+                animationDelay: `${1.3 + index * 0.2}s`
               }}
               onMouseEnter={() => setHoveredCard(service.id)}
               onMouseLeave={() => setHoveredCard(null)}
-              onClick={() => handleCardClick(service.id)}
+              onClick={() => {
+                const serviceRoutes: { [key: string]: string } = {
+                  "1": "/services/software-development",
+                  "2": "/services/data-analytics",
+                  "3": "/services/customer-support",
+                  "4": "/services/web-development"
+                };
+                window.location.href = serviceRoutes[service.id];
+              }}
             >
-              <div className="p-8 h-full flex flex-col">
+              <div className="px-8 py-12 h-full flex flex-col">
                 <div className="mb-6 flex justify-between items-center">
                   <div className="flex items-center">
                     {getIconForService(service.id)}
