@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
+
+/**
+ * Next.js configuration for GitHub Pages deployment
+ * - basePath and assetPrefix are set to '/TSTLUXKOM' in production for GitHub Pages
+ * - Static export is enabled for GitHub Pages compatibility
+ * - Images are unoptimized as required for static export
+ */
 const nextConfig = {
-    basePath: process.env.NODE_ENV === 'production' ? '/tst-web-app' : '',
+    basePath: process.env.NODE_ENV === 'production' ? '/TSTLUXKOM' : '',
     output: 'export',  // Enable static exports
-    assetPrefix: process.env.NODE_ENV === 'production' ? '/tst-web-app/' : '',
+    assetPrefix: process.env.NODE_ENV === 'production' ? '/TSTLUXKOM/' : '',
     trailingSlash: true,
     images: {
         unoptimized: true, // Required for static export
@@ -17,8 +24,7 @@ const nextConfig = {
             'cdn.public.lu',
             'ses-techcom.com',
             'tstgroup.de'
-        ],
-        unoptimized: true
+        ]
     },
     webpack(config) {
         config.module.rules.push({
