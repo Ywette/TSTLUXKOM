@@ -104,3 +104,5 @@ Quality Gates:
 ## PICTURES
 4 services
 1 hero section pictures for every services description separately (+4 in total as minimum)
+
+CSS for card movements in  

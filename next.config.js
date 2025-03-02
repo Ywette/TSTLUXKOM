@@ -1,14 +1,16 @@
 /** @type {import('next').NextConfig} */
 
 const isProd = process.env.NODE_ENV === 'production';
+const basePath = isProd ? '/tst-web-app' : '';
 
 /**
  * Next.js configuration optimized for both development and production
  */
 const nextConfig = {
-    basePath: isProd ? '/tst-web-app' : '',
-    assetPrefix: isProd ? '/tst-web-app/' : '',
+    basePath,
+    assetPrefix: isProd ? `${basePath}/` : '',
     output: 'export',
+    trailingSlash: true, // Always add trailing slashes
     images: {
         unoptimized: true,
         remotePatterns: [
@@ -25,11 +27,6 @@ const nextConfig = {
         ]
     },
     
-    // Production-specific settings
-    ...(isProd && {
-        trailingSlash: true,
-    }),
-    
     // Development-specific settings
     webpack: (config) => {
         // SVG handling
@@ -39,7 +36,11 @@ const nextConfig = {
         });
         
         return config;
-    }
+    },
+
+    // Ensure all static files are copied
+    distDir: 'out',
+    cleanDistDir: true
 };
 
 module.exports = nextConfig; 

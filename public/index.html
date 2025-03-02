@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TST Web App</title>
+    <script type="text/javascript">
+        (function() {
+            // Check if we have a stored path from a 404 redirect
+            var redirect = sessionStorage.getItem('redirect');
+            if (redirect) {
+                // Clear the stored path
+                sessionStorage.removeItem('redirect');
+                
+                // Get the base path
+                var basePath = '/tst-web-app';
+                
+                // Construct the full path
+                var fullPath = basePath + (redirect.startsWith('/') ? redirect : '/' + redirect);
+                
+                // Update the URL without reloading
+                window.history.replaceState(null, null, fullPath);
+            } else if (window.location.pathname === '/tst-web-app') {
+                // If we're at the base path without a trailing slash, add it
+                window.history.replaceState(null, null, '/tst-web-app/');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div id="__next">Loading...</div>
+</body>
+</html> 

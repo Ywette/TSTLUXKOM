@@ -2,38 +2,39 @@
 import React from 'react';
 import Button from './ui/Button';
 import Link from 'next/link';
+import '../app/stylings/HeroSection.css';
 
 function HeroSection() {
   return (
-    <section className="relative h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden bg-primary">
+    <section className="hero-section">
       {/* Animated gradient background */}
-      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 animate-gradient-x"></div>
+      <div className="hero-gradient-bg"></div>
       
       {/* Decorative circles */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-
-      <div className="container mx-auto px-6 flex flex-col h-full relative z-10">
-        <div className="flex-1 flex items-center justify-center">
-          <div className="max-w-3xl text-center space-y-8">
-            <h1 className="text-5xl md:text-6xl font-bold text-text-light leading-tight">
+      <div className="decorative-circle-1"></div>
+      <div className="decorative-circle-2"></div>
+      
+      <div className="hero-container">
+        <div className="hero-content-wrapper">
+          <div className="hero-content">
+            <h1 className="hero-title">
               Your Partner for
-              <span className="block text-accent-highlight mt-2">SATCOM Projects</span>
+              <span className="hero-highlight">SATCOM Projects</span>
             </h1>
             
-            <p className="text-xl text-text-light/80 leading-relaxed">
+            <p className="hero-description">
               Whether you're looking to enhance your service management, install or refurbish antennas, or optimize your RF equipment, we've got you covered. At TST LUXKOM, we specialize in delivering seamless, reliable, and high-performance satellite communication solutions.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+            
+            <div className="hero-buttons">
               <Link href="#services">
-                <Button 
+                <Button
                   className="text-lg px-8 py-4 font-semibold bg-accent-highlight hover:bg-accent-highlight/90 text-text-light w-full sm:w-auto"
                   onClick={(e) => {
                     e.preventDefault();
                     document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                >                       
+                >
                   Discover Services
                 </Button>
               </Link>
@@ -45,10 +46,10 @@ function HeroSection() {
             </div>
           </div>
         </div>
-
+        
         {/* Scroll indicator */}
-        <div className="flex justify-center pb-8">
-          <div className="w-1 h-16 rounded-full bg-accent-highlight/50 animate-bounce"></div>
+        <div className="scroll-indicator">
+          <div className="scroll-indicator-line"></div>
         </div>
       </div>
     </section>

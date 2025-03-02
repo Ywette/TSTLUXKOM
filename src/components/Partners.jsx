@@ -1,11 +1,10 @@
-// app/partners/page.tsx
 'use client';
 
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Handshake } from 'lucide-react/dist/esm/icons';
-
+import { Users } from 'lucide-react';
+import '../app/stylings/Partners.css';
 
 const partners = [
   {
@@ -35,43 +34,41 @@ const partners = [
   }
 ];
 
-
-
 export default function Partners() {
-  const [hoveredPartner, setHoveredPartner] = useState<number | null>(null);
+  const [hoveredPartner, setHoveredPartner] = useState(null);
   
   console.log('Current hovered partner:', hoveredPartner); // Debug state
- 
+  
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="partners-wrapper">
       {/* Top transition gradient */}
-      <div className="h-32 bg-gradient-to-b from-primary to-white" />
+      <div className="top-gradient" />
       
-      <section id="partners" className="bg-white">
-        <div className="flex flex-col items-center py-24">
-          <h2 className="text-3xl font-bold text-primary mb-16">Our Partners</h2>
-          <div className="flex items-center justify-center gap-32 max-w-7xl mx-auto px-8">
+      <section id="partners" className="partners-section">
+        <div className="partners-container">
+          <h2 className="partners-title">Our Partners</h2>
+          <div className="partners-grid">
             {partners.map((partner, index) => (
               <div
                 key={index}
-                className="relative w-[200px] h-[100px] flex items-center justify-center"
+                className="partner-item"
                 onMouseEnter={() => setHoveredPartner(index)}
                 onMouseLeave={() => setHoveredPartner(null)}
               >
-                <Link href={partner.url} target="_blank" className="w-full h-full flex items-center justify-center">
-                  <div className="relative group w-full h-full flex items-center justify-center">
-                    <div className="relative w-full h-full flex items-center justify-center">
+                <Link href={partner.url} target="_blank" className="partner-link">
+                  <div className="partner-content">
+                    <div className="partner-image-container">
                       <Image
                         src={partner.img}
                         alt={partner.alt}
                         width={160}
                         height={80}
-                        className="object-contain max-w-full max-h-full transition-transform duration-300 group-hover:scale-105"
+                        className="partner-image"
                       />
                     </div>
                     {hoveredPartner === index && (
-                      <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 transition-all duration-300 opacity-100 z-50 bg-white p-2 rounded-full shadow-lg">
-                        <Handshake className="h-8 w-8 text-primary animate-bounce" />
+                      <div className="partner-icon">
+                        <Users className="partner-icon-svg" />
                       </div>
                     )}
                   </div>
@@ -81,9 +78,9 @@ export default function Partners() {
           </div>
         </div>
       </section>
-
+      
       {/* Bottom transition gradient */}
-      <div className="h-32 bg-gradient-to-b from-white to-primary" />
+      <div className="bottom-gradient" />
     </div>
   );
- }
+}
