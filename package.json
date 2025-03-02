@@ -10,7 +10,7 @@
     "build": "next build && type nul > out/.nojekyll",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && touch out/.nojekyll && cp -r out/* ."
+    "deploy": "next build && type nul > out/.nojekyll"
   },
   "dependencies": {
     "@svgr/webpack": "8.1.0",
