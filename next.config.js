@@ -29,18 +29,28 @@ const nextConfig = {
     
     // Development-specific settings
     webpack: (config) => {
-        // SVG handling
+        // Handle SVG files
         config.module.rules.push({
             test: /\.svg$/,
             use: ['@svgr/webpack']
         });
-        
+
         return config;
     },
 
+    // Production optimizations
+    compress: true,
+    poweredByHeader: false,
+    reactStrictMode: true,
+    
     // Ensure all static files are copied
     distDir: 'out',
-    cleanDistDir: true
+    cleanDistDir: true,
+    
+    // Ensure static assets are handled correctly
+    publicRuntimeConfig: {
+        basePath: basePath
+    }
 };
 
 module.exports = nextConfig; 
