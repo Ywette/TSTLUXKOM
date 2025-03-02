@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const isProd = process.env.NODE_ENV === 'production';
-const basePath = isProd ? '/tst-web-app' : '';
+const basePath = isProd ? '/TSTLUXKOM' : '';
 
 /**
  * Next.js configuration optimized for both development and production
@@ -35,9 +35,18 @@ const nextConfig = {
             use: ['@svgr/webpack']
         });
 
+        // Ensure CSS is handled properly
+        config.module.rules.push({
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+        });
+
         return config;
     },
 
+    // Ensure CSS is properly extracted
+    optimizeFonts: false,
+    
     // Production optimizations
     compress: true,
     poweredByHeader: false,

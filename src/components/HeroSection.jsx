@@ -5,6 +5,9 @@ import Link from 'next/link';
 import '../app/stylings/HeroSection.css';
 
 function HeroSection() {
+  const isProd = process.env.NODE_ENV === 'production';
+  const basePath = isProd ? '/TSTLUXKOM' : '';
+
   return (
     <section className="hero-section">
       {/* Animated gradient background */}
@@ -27,7 +30,7 @@ function HeroSection() {
             </p>
             
             <div className="hero-buttons">
-              <Link href="#services">
+              <Link href={`${basePath}/#services`}>
                 <Button
                   className="text-lg px-8 py-4 font-semibold bg-accent-highlight hover:bg-accent-highlight/90 text-text-light w-full sm:w-auto"
                   onClick={(e) => {
@@ -38,7 +41,7 @@ function HeroSection() {
                   Discover Services
                 </Button>
               </Link>
-              <Link href="/contact">
+              <Link href={`${basePath}/contact`}>
                 <Button className="text-lg px-8 py-4 font-semibold border-2 border-accent-highlight bg-transparent hover:bg-accent-highlight/10 text-accent-highlight w-full sm:w-auto transition-colors">
                   Tell About Your Project
                 </Button>

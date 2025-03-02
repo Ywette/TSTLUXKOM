@@ -27,6 +27,8 @@ export function ServicesList() {
   const [allCardsVisible, setAllCardsVisible] = useState(false);
   const containerRef = useRef(null);
   const router = useRouter();
+  const isProd = process.env.NODE_ENV === 'production';
+  const basePath = isProd ? '/TSTLUXKOM' : '';
 
   useEffect(() => {
     // Set all cards visible after a short delay
@@ -71,7 +73,7 @@ export function ServicesList() {
               onMouseEnter={() => setHoveredCard(service.id)}
               onMouseLeave={() => setHoveredCard(null)}
               onClick={() => {
-                router.push(`/services/${service.web}`);
+                router.push(`${basePath}/services/${service.web}`);
               }}
             >
               <div className="service-card-inner">

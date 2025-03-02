@@ -13,6 +13,8 @@ export function Header() {
     const [navVisibility, setNavVisibility] = useState(true)
     const router = useRouter()
     const pathname = usePathname()
+    const isProd = process.env.NODE_ENV === 'production';
+    const basePath = isProd ? '/TSTLUXKOM' : '';
 
     return (
         <div className="header-container">
@@ -21,7 +23,7 @@ export function Header() {
                     {/* Logo section */}
                     <div className="logo-container">
                         <Image
-                            src="/tst-logo-v45deg.svg"
+                            src={`${basePath}/tst-logo-v45deg.svg`}
                             alt="TST LUXKOM Logo"
                             priority
                             height={100}
@@ -38,7 +40,7 @@ export function Header() {
                         <ul className="nav-list">
                             <li>
                                 <Link 
-                                    href="/" 
+                                    href={`${basePath}/`}
                                     className="nav-link"
                                 >
                                     Home
@@ -46,7 +48,7 @@ export function Header() {
                             </li>
                             <li>
                                 <Link 
-                                    href="#about" 
+                                    href={`${basePath}/#about`}
                                     className="nav-link"
                                 >
                                     About
@@ -57,7 +59,7 @@ export function Header() {
                                     className="services-button"
                                     onClick={async () => {
                                         if (pathname !== '/') {
-                                            await router.push('/')
+                                            await router.push(`${basePath}/`)
                                             setTimeout(() => {
                                                 const servicesSection = document.getElementById('services')
                                                 if (servicesSection) {
@@ -87,7 +89,7 @@ export function Header() {
                                         {services.map((service) => (
                                             <Link
                                                 key={service.id}
-                                                href={`/services/${service.web}`}
+                                                href={`${basePath}/services/${service.web}`}
                                                 className="service-link"
                                             >
                                                 {service.title}
@@ -98,7 +100,7 @@ export function Header() {
                             </li>
                             <li>
                                 <Link 
-                                    href="/contact" 
+                                    href={`${basePath}/contact`}
                                     className="nav-link"
                                 >
                                     Contact
