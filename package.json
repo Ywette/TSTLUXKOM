@@ -9,28 +9,25 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "deploy": "next build"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@svgr/webpack": "8.1.0",
     "@types/node": "20.5.9",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
-    "critters": "^0.0.25",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "framer-motion": "10.16.4",
     "geist": "1.2.0",
     "lucide-react": "^0.477.0",
     "next": "13.4.19",
-    "nodemon": "3.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.0.0",
+    "@svgr/webpack": "8.1.0",
     "postcss": "8.4.29",
     "postcss-preset-env": "^9.1.4"
   }

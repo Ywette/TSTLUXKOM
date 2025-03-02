@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npm install touch-cli -g
+          npm install -D @svgr/webpack
         
       - name: Build
         run: |

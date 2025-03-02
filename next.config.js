@@ -34,13 +34,6 @@ const nextConfig = {
             test: /\.svg$/,
             use: ['@svgr/webpack']
         });
-
-        // Ensure CSS is handled properly
-        config.module.rules.push({
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader']
-        });
-
         return config;
     },
 
