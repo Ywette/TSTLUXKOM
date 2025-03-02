@@ -7,10 +7,10 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && type nul > out/.nojekyll",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && type nul > out/.nojekyll"
+    "deploy": "next build"
   },
   "dependencies": {
     "@svgr/webpack": "8.1.0",
