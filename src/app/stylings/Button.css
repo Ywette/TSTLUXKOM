@@ -1,0 +1,94 @@
+/* components/ui/Button.css */
+
+.btn {
+    position: relative;
+    overflow: hidden;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.9rem;
+  }
+  
+  .btn-content {
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* Primary Button (default) */
+  .btn-primary {
+    background: linear-gradient(to right, var(--accent-color, #ec4899), var(--accent-color-secondary, #f472b6));
+    color: white;
+    box-shadow: 0 4px 14px rgba(236, 72, 153, 0.25);
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+  }
+  
+  .btn-primary:active {
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.25);
+  }
+  
+  /* Secondary Button */
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .btn-secondary:active {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  /* Outline Button */
+  .btn-outline {
+    background: transparent;
+    color: var(--accent-color, #ec4899);
+    border: 2px solid var(--accent-color, #ec4899);
+  }
+  
+  .btn-outline:hover {
+    background: rgba(236, 72, 153, 0.1);
+  }
+  
+  .btn-outline:active {
+    background: rgba(236, 72, 153, 0.05);
+  }
+  
+  /* Disabled state for all buttons */
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  /* Custom color utility classes */
+  .btn-success {
+    --accent-color: #10b981;
+    --accent-color-secondary: #34d399;
+  }
+  
+  .btn-warning {
+    --accent-color: #f59e0b;
+    --accent-color-secondary: #fbbf24;
+  }
+  
+  .btn-danger {
+    --accent-color: #ef4444;
+    --accent-color-secondary: #f87171;
+  }
+  
+  .btn-info {
+    --accent-color: #3b82f6;
+    --accent-color-secondary: #60a5fa;
+  }

@@ -30,8 +30,7 @@ export function Header() {
                             width={100}
                         />
                         <div className="logo-text">
-                            <p>TST</p>
-                            <p>LUXKOM</p>
+                            <p>TST LUXKOM</p>                         
                         </div>
                     </div>
 

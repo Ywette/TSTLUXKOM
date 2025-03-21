@@ -22,6 +22,7 @@ function HeroSection() {
           <div className="hero-content">
             <h1 className="hero-title">
               Your Partner for
+              <br />
               <span className="hero-highlight">SATCOM Projects</span>
             </h1>
             
