@@ -78,14 +78,13 @@ export function ServicesList() {
             >
               <div className="service-card-inner">
                 <div className="card-header">
-                  <div className={`icon-container ${service.id === "1" ? 'rotate-icon' : 'scale-icon'}`}>
+                  <div className="icon-container">
                     {getIconForService(service.id)}
                   </div>
+                  <h3 className="service-title">
+                    {service.title}
+                  </h3>
                 </div>
-                
-                <h3 className="service-title">
-                  {service.title}
-                </h3>
                 
                 <p className="service-description">
                   {service.description}

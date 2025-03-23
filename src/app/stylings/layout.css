@@ -1,0 +1,27 @@
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--bg-primary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+  margin-top: 80px; /* Adjust this value based on your header height */
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  position: relative;
+}
+
+/* Ensure each section takes full height */
+section {
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} 

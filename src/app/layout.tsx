@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./stylings/layout.css";
 import { Header } from "@/components/Header";
 // import Footer from "@/components/Footer";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -21,15 +23,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} antialiased flex flex-col min-h-screen`}
+        className={`${inter.variable} antialiased`}
         style={{
           backgroundColor: 'var(--bg-primary)',
-          color: 'var(--text-on-dark)'
+          color: 'var(--text-on-dark)',
+          margin: 0,
+          padding: 0,
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column'
         }}
       >
-        <Header />
-        {children}
-       {/* <Footer /> */}
+        <div className="sticky-header">
+          <Header />
+        </div>
+        <main className="main-content">
+          {children}
+        </main>
+        {/* <Footer /> */}
       </body>
     </html>
   );

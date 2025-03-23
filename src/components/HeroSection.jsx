@@ -12,11 +12,11 @@ function HeroSection() {
     <section className="hero-section">
       {/* Animated gradient background */}
       <div className="hero-gradient-bg"></div>
-      
+
       {/* Decorative circles */}
       <div className="decorative-circle-1"></div>
       <div className="decorative-circle-2"></div>
-      
+
       <div className="hero-container">
         <div className="hero-content-wrapper">
           <div className="hero-content">
@@ -25,15 +25,16 @@ function HeroSection() {
               <br />
               <span className="hero-highlight">SATCOM Projects</span>
             </h1>
-            
+
             <p className="hero-description">
-              Whether you're looking to enhance your service management, install or refurbish antennas, or optimize your RF equipment, we've got you covered. At TST LUXKOM, we specialize in delivering seamless, reliable, and high-performance satellite communication solutions.
+              Whether you're looking to enhance your service management, install or refurbish antennas, or optimize your RF equipment, we've got you covered. </p>
+              <p className="hero-description">At TST LUXKOM, we specialize in delivering seamless, reliable, and high-performance satellite communication solutions.
             </p>
-            
+
             <div className="hero-buttons">
               <Link href={`${basePath}/#services`}>
                 <Button
-                  className="text-lg px-8 py-4 font-semibold bg-accent-highlight hover:bg-accent-highlight/90 text-text-light w-full sm:w-auto"
+                  className="text-lg px-8 py-4 font-semibold text-text-light w-full sm:w-auto"
                   onClick={(e) => {
                     e.preventDefault();
                     document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
@@ -50,11 +51,11 @@ function HeroSection() {
             </div>
           </div>
         </div>
-        
+
         {/* Scroll indicator */}
-        <div className="scroll-indicator">
+        {/* <div className="scroll-indicator">
           <div className="scroll-indicator-line"></div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

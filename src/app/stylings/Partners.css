@@ -3,8 +3,8 @@
     width: 100%;
     overflow: hidden;
   }
-  
-  .top-gradient {
+  bdo
+  /* .top-gradient {
     height: 8rem;
     background: linear-gradient(to bottom, var(--primary-color), white);
   }
@@ -12,7 +12,7 @@
   .bottom-gradient {
     height: 8rem;
     background: linear-gradient(to bottom, white, var(--primary-color));
-  }
+  } */
   
   
   .partners-container {

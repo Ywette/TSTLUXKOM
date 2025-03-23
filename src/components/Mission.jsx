@@ -79,40 +79,18 @@ const Mission = () => {
           </div>
 
           {/* Right Column: Core Values */}
-          <div className="values-card">
-            <div className="card-header">
-              <StarIcon className="card-icon" />
-              <h3 className="card-title">Core Values</h3>
-            </div>
-            
-            <div className="values-list">
-              <div className="value-item-group">
-                <div className="value-item">
-                  <div className="value-hover-effect"></div>
-                  <h4 className="value-title">Excellence</h4>
-                  <p className="value-text">
-                    We strive for excellence in everything we do, from project delivery to customer service.
-                  </p>
+          <div className="content-left">
+            <div className="value-item-group">
+              <div className="value-item">
+                <div className="value-hover-effect"></div>
+                <div className="card-header">
+                  <StarIcon className="card-icon" />
+                  <h3 className="value-title">Core Values</h3>
                 </div>
-              </div>
-              
-              <div className="value-item-group">
-                <div className="value-item">
-                  <div className="value-hover-effect"></div>
-                  <h4 className="value-title">Innovation</h4>
-                  <p className="value-text">
-                    We embrace new technologies and creative solutions to solve complex challenges.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="value-item-group">
-                <div className="value-item">
-                  <div className="value-hover-effect"></div>
-                  <h4 className="value-title">Integrity</h4>
-                  <p className="value-text">
-                    We conduct our business with the highest standards of professionalism and ethics.
-                  </p>
+                <div className="value-text">
+                  <p><strong>Excellence:</strong> We strive for excellence in everything we do, from project delivery to customer service.</p>
+                  <p><strong>Innovation:</strong> We embrace new technologies and creative solutions to solve complex challenges.</p>
+                  <p><strong>Integrity:</strong> We conduct our business with the highest standards of professionalism and ethics.</p>
                 </div>
               </div>
             </div>
