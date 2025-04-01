@@ -3,8 +3,7 @@
 import { services } from '@/data/services';
 import Link from 'next/link';
 import { Cog, BarChart3, HeadphonesIcon, Code } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import '../app/stylings/ServicesList.css';
 
 const getIconForService = (serviceId) => {
@@ -24,18 +23,6 @@ const getIconForService = (serviceId) => {
 
 export function ServicesList() {
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [allCardsVisible, setAllCardsVisible] = useState(false);
-  const containerRef = useRef(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    // Set all cards visible after a short delay
-    const timer = setTimeout(() => {
-      setAllCardsVisible(true);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <section id="services" className="services-section">
@@ -55,20 +42,12 @@ export function ServicesList() {
         </div>
 
         {/* Services Grid */}
-        <div 
-          ref={containerRef}
-          className={`services-container ${allCardsVisible ? 'all-visible' : ''}`}
-          data-hovered={hoveredCard}
-        >
-          {services.map((service, index) => (
+        <div className="services-container">
+          {services.map((service) => (
             <Link
               key={service.id}
               href={`/services/${service.web}`}
-              className={`service-card ${allCardsVisible ? 'visible' : ''} ${hoveredCard === service.id ? 'hovered' : ''}`}
-              style={{
-                transitionDelay: hoveredCard ? '0ms' : `${index * 200}ms`,
-                animationDelay: `${1.3 + index * 0.2}s`
-              }}
+              className={`service-card ${hoveredCard === service.id ? 'hovered' : ''}`}
               onMouseEnter={() => setHoveredCard(service.id)}
               onMouseLeave={() => setHoveredCard(null)}
             >
