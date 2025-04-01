@@ -13,6 +13,8 @@ const nextConfig = {
     trailingSlash: true,
     images: {
         unoptimized: true,
+        loader: 'custom',
+        loaderFile: './image-loader.js',
         remotePatterns: [
             {
                 protocol: 'https',
