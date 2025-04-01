@@ -12,8 +12,6 @@ export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const router = useRouter()
     const pathname = usePathname()
-    const isProd = process.env.NODE_ENV === 'production';
-    const basePath = isProd ? '/TSTLUXKOM' : '';
 
     // Map icons to services
     const serviceIcons = {
@@ -59,7 +57,7 @@ export function Header() {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
         } else {
-            router.push(`${basePath}${path}`);
+            router.push(path);
         }
     };
 
@@ -72,7 +70,7 @@ export function Header() {
                         <div className="logo-container">
                             <div className="logo-image-wrapper">
                                 <Image
-                                    src={`${basePath}/tst-logo-v45deg.svg`}
+                                    src="/tst-logo-v45deg.svg"
                                     alt="TST LUXKOM Logo"
                                     priority
                                     fill
@@ -99,7 +97,7 @@ export function Header() {
                                 {Object.entries(navItems).map(([name, path], index) => (
                                     <li key={index}>
                                         <Link
-                                            href={`${basePath}${path}`}
+                                            href={path}
                                             className="nav-link services-button"
                                             onClick={(e) => handleNavClick(e, path)}
                                         >
