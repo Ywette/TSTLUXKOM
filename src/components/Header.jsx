@@ -12,6 +12,8 @@ export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const router = useRouter()
     const pathname = usePathname()
+    const isProd = process.env.NODE_ENV === 'production';
+    const basePath = isProd ? '/TSTLUXKOM' : '';
 
     // Map icons to services
     const serviceIcons = {
@@ -70,7 +72,7 @@ export function Header() {
                         <div className="logo-container">
                             <div className="logo-image-wrapper">
                                 <Image
-                                    src="/tst-logo-v45deg.svg"
+                                    src={`${basePath}/tst-logo-v45deg.svg`}
                                     alt="TST LUXKOM Logo"
                                     priority
                                     fill

@@ -13,8 +13,6 @@ const nextConfig = {
     trailingSlash: true,
     images: {
         unoptimized: true,
-        loader: 'custom',
-        loaderFile: './image-loader.js',
         remotePatterns: [
             {
                 protocol: 'https',
@@ -39,6 +37,8 @@ const nextConfig = {
         return config;
     },
 
+    // Ensure static files are copied
+    distDir: 'out',
     optimizeFonts: false,
     compress: true,
     poweredByHeader: false,
