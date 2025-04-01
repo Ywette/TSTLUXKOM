@@ -27,8 +27,6 @@ export function ServicesList() {
   const [allCardsVisible, setAllCardsVisible] = useState(false);
   const containerRef = useRef(null);
   const router = useRouter();
-  const isProd = process.env.NODE_ENV === 'production';
-  const basePath = isProd ? '/TSTLUXKOM' : '';
 
   useEffect(() => {
     // Set all cards visible after a short delay
@@ -63,8 +61,9 @@ export function ServicesList() {
           data-hovered={hoveredCard}
         >
           {services.map((service, index) => (
-            <div
+            <Link
               key={service.id}
+              href={`/services/${service.web}`}
               className={`service-card ${allCardsVisible ? 'visible' : ''} ${hoveredCard === service.id ? 'hovered' : ''}`}
               style={{
                 transitionDelay: hoveredCard ? '0ms' : `${index * 200}ms`,
@@ -72,9 +71,6 @@ export function ServicesList() {
               }}
               onMouseEnter={() => setHoveredCard(service.id)}
               onMouseLeave={() => setHoveredCard(null)}
-              onClick={() => {
-                router.push(`${basePath}/services/${service.web}`);
-              }}
             >
               <div className="service-card-inner">
                 <div className="card-header">
@@ -101,7 +97,7 @@ export function ServicesList() {
                   </ul>
                 )}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
