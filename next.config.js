@@ -9,7 +9,7 @@ const basePath = isProd ? '/TSTLUXKOM' : '';
 const nextConfig = {
     output: 'export',
     basePath,
-    assetPrefix: isProd ? '/TSTLUXKOM/' : '',
+    assetPrefix: isProd ? `${basePath}/` : '',
     trailingSlash: true,
     images: {
         unoptimized: true,
