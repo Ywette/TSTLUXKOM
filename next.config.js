@@ -7,8 +7,9 @@ const basePath = isProd ? '/TSTLUXKOM' : '';
  * Next.js configuration optimized for both development and production
  */
 const nextConfig = {
+    output: 'export',
     basePath,
-    assetPrefix: isProd ? `${basePath}/` : '',
+    assetPrefix: isProd ? '/TSTLUXKOM/' : '',
     trailingSlash: true,
     images: {
         unoptimized: true,
@@ -19,9 +20,10 @@ const nextConfig = {
             }
         ],
         domains: [
-            'connectivity.esa.int',
             'cdn.public.lu',
+            'govsat.lu',
             'ses-techcom.com',
+            'tst-fahrzeugbau.com',
             'tstgroup.de'
         ]
     },
