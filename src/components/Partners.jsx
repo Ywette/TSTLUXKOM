@@ -1,86 +1,73 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Users } from 'lucide-react';
 import '../app/stylings/Partners.css';
 
 const partners = [
   {
+    name: 'LuxGovSat SA',
+    logo: 'https://govsat.lu/wp-content/themes/govsat/dist/images/logo.svg',
     url: 'https://govsat.lu/',
-    img: 'https://connectivity.esa.int/sites/default/files/LuxGovSat%20logo.jpg',
-    alt: 'LuxGovSat SA'
+    bgColor: '#1a365d' // Dark blue background for white logo
   },
   {
+    name: 'Ministry of Foreign and European Affairs',
+    logo: 'https://cdn.public.lu/pictures/logos/gov/fr/gov-light.png',
     url: 'https://mae.gouvernement.lu/en.html',
-    img: 'https://cdn.public.lu/pictures/logos/gov/fr/gov-light.png',
-    alt: 'Ministry of Foreign and European Affairs'
+    bgColor: '#ffffff' // White background for dark logo
   },
   {
+    name: 'SES Techcom',
+    logo: 'https://ses-techcom.com/wp-content/themes/oxo-theme/dist/img/logo.svg',
     url: 'https://ses-techcom.com',
-    img: 'https://ses-techcom.com/wp-content/themes/oxo-theme/dist/img/logo.svg',
-    alt: 'SES Techcom'
+    bgColor: '#f8fafc' // Light gray background for dark logo
   },
   {
+    name: 'TST Fahrzeugbau',
+    logo: 'https://tst-fahrzeugbau.com/wp-content/uploads/2019/11/logo-208x74.png',
     url: 'https://tstgroup.de',
-    img: 'https://tstgroup.de/images/tfb.png',
-    alt: 'TST Fahrzeugbau'
+    bgColor: '#ffffff' // White background for dark logo
   },
   {
+    name: 'IP Copter',
+    logo: 'https://tstgroup.de/images/ipcopter.gif',
     url: 'https://www.ipcopter.com/de/',
-    img: 'https://tstgroup.de/images/ipcopter.gif',
-    alt: 'IP Copter'
+    bgColor: '#f8fafc' // Light gray background for dark logo
   }
 ];
 
 export default function Partners() {
-  const [hoveredPartner, setHoveredPartner] = useState(null);
-  
-  console.log('Current hovered partner:', hoveredPartner); // Debug state
-  
   return (
     <div className="partners-wrapper">
-      {/* Top transition gradient */}
-      <div className="top-gradient" />
-      
-      <section id="partners" className="partners-section">
-        <div className="partners-container">
-          <h2 className="partners-title">Our Partners</h2>
-          <div className="partners-grid">
-            {partners.map((partner, index) => (
-              <div
-                key={index}
-                className="partner-item"
-                onMouseEnter={() => setHoveredPartner(index)}
-                onMouseLeave={() => setHoveredPartner(null)}
-              >
-                <Link href={partner.url} target="_blank" className="partner-link">
-                  <div className="partner-content">
-                    <div className="partner-image-container">
-                      <Image
-                        src={partner.img}
-                        alt={partner.alt}
-                        width={160}
-                        height={80}
-                        className="partner-image"
-                      />
-                    </div>
-                    {hoveredPartner === index && (
-                      <div className="partner-icon">
-                        <Users className="partner-icon-svg" />
-                      </div>
-                    )}
-                  </div>
-                </Link>
+      <div className="partners-container">
+        <h2 className="partners-title">Our Partners</h2>
+        <div className="partners-grid">
+          {partners.map((partner, index) => (
+            <Link 
+              key={index} 
+              href={partner.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="partner-item"
+              style={{ backgroundColor: partner.bgColor }}
+            >
+              <div className="partner-image-container">
+                <Image
+                  src={partner.logo}
+                  alt={partner.name}
+                  width={160}
+                  height={120}
+                  className="partner-image"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  unoptimized
+                />
               </div>
-            ))}
-          </div>
+            </Link>
+          ))}
         </div>
-      </section>
-      
-      {/* Bottom transition gradient */}
-      <div className="bottom-gradient" />
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -22,7 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/ui/Cards", "src/app/pages", "src/app/contact", "next.config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
-, "src/components/Footer.jsx", "src/components/Header.js", "src/components/HeroSection.jsx", "src/components/Mission.jsx", "src/components/Partners.jsx", "src/components/ServicesList.jsx", "src/components/ServicesList.jsx", "src/components/ServicesList.jsx", "src/components/ui/Button.jsx"

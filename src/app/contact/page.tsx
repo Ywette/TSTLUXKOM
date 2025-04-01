@@ -1,7 +1,16 @@
 "use client"
-import React, { useState, useCallback } from 'react';
-import { MapPin, Mail, Phone, Instagram, Twitter, Linkedin, Upload } from 'lucide-react';
-import { services } from '@/data/services';
+import React, { useState, useCallback, useEffect } from 'react';
+import { MapPin, Mail, Phone, Instagram, Twitter, Linkedin, Upload, 
+         Satellite, Globe, Wifi, Shield, Radio, Zap } from 'lucide-react';
+import '../stylings/Contacts.css';
+
+// Demo services data - replace with your actual data import
+const services = [
+  { id: 'satcom', title: 'Satellite Communications', type: 'satcom', web: 'satcom' },
+  { id: 'connectivity', title: 'Global Connectivity', type: 'connectivity', web: 'connectivity' },
+  { id: 'consulting', title: 'Technical Consulting', type: 'consulting', web: 'consulting' },
+  { id: 'security', title: 'Secure Communications', type: 'security', web: 'security' }
+];
 
 interface FormData {
   service: string;
@@ -25,20 +34,48 @@ const ContactForm = () => {
     description: '',
     files: []
   });
+  
+  // Animation states
+  const [satellitePosition, setSatellitePosition] = useState({ x: 0, y: 0 });
+  const [showSignal, setShowSignal] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [showTrack, setShowTrack] = useState(false);
+  
+  // Service icon mapping
+  const serviceIcons = {
+    'satcom': Satellite,
+    'connectivity': Wifi,
+    'consulting': Globe,
+    'security': Shield
+  };
 
+  // Handle input changes
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Trigger signal animation when selecting a service
+    if (name === 'service' && value) {
+      setShowSignal(true);
+      setTimeout(() => setShowSignal(false), 3000);
+    }
   }, []);
 
+  // Handle file uploads
   const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = Array.from(e.target.files || []);
+    
+    // Create a "transmission" effect when files are added
+    setShowTrack(true);
+    setTimeout(() => setShowTrack(false), 2000);
+    
     setFormData(prev => ({
       ...prev,
       files: [...prev.files, ...newFiles]
     }));
   }, []);
 
+  // Remove uploaded files
   const removeFile = useCallback((index: number) => {
     setFormData(prev => ({
       ...prev,
@@ -46,57 +83,135 @@ const ContactForm = () => {
     }));
   }, []);
 
+  // Form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add form submission logic here
+    
+    // Animation for form submission
+    setShowSignal(true);
+    setFormSubmitted(true);
+    
+    // Mock submission process with timeout
+    setTimeout(() => {
+      setShowSignal(false);
+      alert('Your message has been transmitted successfully! Our satellite network has received your communication.');
+      
+      // Reset form after submission (optional)
+      // setFormData({
+      //   service: '',
+      //   company: '',
+      //   fullName: '',
+      //   position: '',
+      //   email: '',
+      //   phone: '',
+      //   description: '',
+      //   files: []
+      // });
+      // setFormSubmitted(false);
+    }, 3000);
   };
+  
+  // Mouse move effect for satellite follow
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Only update occasionally to make movement smoother
+      if (Math.random() > 0.92) {
+        const x = (e.clientX / window.innerWidth) * 20 - 10;
+        const y = (e.clientY / window.innerHeight) * 20 - 10;
+        setSatellitePosition({ x, y });
+      }
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+  
+  // Random satellite track effect
+  useEffect(() => {
+    const trackInterval = setInterval(() => {
+      if (Math.random() > 0.7) {
+        setShowTrack(true);
+        setTimeout(() => setShowTrack(false), 2000);
+      }
+    }, 5000);
+    
+    return () => clearInterval(trackInterval);
+  }, []);
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4">
-      <div className="relative max-w-5xl w-full">
+    <main className="contact-page">
+      {/* Background animation elements */}
+      <div className="space-background">
+        <div className="stars"></div>
+        <div className="orbit"></div>
+        <div className="earth-background"></div>
+        {showTrack && <div className="satellite-track"></div>}
+      </div>
+      
+      {/* Floating satellite that follows cursor */}
+      <div className="satellite" style={{ 
+        transform: `translate(${satellitePosition.x}px, ${satellitePosition.y}px)` 
+      }}>
+        <Satellite size={24} className="satellite-icon" />
+        <div className={`signal-wave ${showSignal ? 'transmitting' : ''}`}></div>
+      </div>
+      
+      <div className="contact-container">
         {/* Contact Information Card */}
-        <aside className="absolute left-8 top-1/2 -translate-y-1/2 bg-blue-900 text-white p-8 rounded-lg shadow-xl z-10 w-80">
-          <h2 className="text-2xl font-semibold mb-8">Contact Us</h2>
+        <aside className="contact-info-card">
+          <div className="card-orbit-decoration"></div>
           
-          <address className="not-italic space-y-6">
-            <div className="flex items-start space-x-3">
-              <MapPin className="w-5 h-5 mt-1 flex-shrink-0" aria-hidden="true" />
+          <h2 className="contact-title">
+            <Radio className="title-icon" />
+            Mission Control
+          </h2>
+          
+          <address className="contact-address">
+            <div className="contact-item">
+              <MapPin className="contact-icon pulse-icon" aria-hidden="true" />
               <div>
-                <p>23, Avenue de Paris</p>
-                <p>75012 Paris</p>
+                <p>Ground Station Alpha</p>
+                <p>Luxembourg, EU</p>
               </div>
             </div>
             
-            <div className="flex items-center space-x-3">
-              <Mail className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
-              <a href="mailto:hello@mikechemardin.com" className="break-all hover:underline">
-                hello@mikechemardin.com
+            <div className="contact-item">
+              <Mail className="contact-icon pulse-icon" aria-hidden="true" />
+              <a href="mailto:comms@satconnect.com" className="contact-link">
+                comms@satconnect.com
               </a>
             </div>
             
-            <div className="flex items-center space-x-3">
-              <Phone className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
-              <a href="tel:+33619530144" className="hover:underline">
-                +33619530144
+            <div className="contact-item">
+              <Phone className="contact-icon pulse-icon" aria-hidden="true" />
+              <a href="tel:+35226007000" className="contact-link">
+                +352 2600 7000
               </a>
             </div>
           </address>
 
-          <nav className="mt-12" aria-label="Social Media Links">
-            <ul className="flex space-x-4">
+          <div className="signal-indicator">
+            <div className="signal-dot"></div>
+            <div className="signal-dot"></div>
+            <div className="signal-dot"></div>
+            <span>Satellite Link Active</span>
+          </div>
+
+          <nav className="social-nav" aria-label="Social Media Links">
+            <ul className="social-list">
               <li>
-                <a href="#" aria-label="Instagram" className="hover:opacity-75 transition-opacity">
-                  <Instagram className="w-6 h-6" />
+                <a href="#" aria-label="Instagram" className="social-icon-link">
+                  <Instagram className="social-icon" />
                 </a>
               </li>
               <li>
-                <a href="#" aria-label="Twitter" className="hover:opacity-75 transition-opacity">
-                  <Twitter className="w-6 h-6" />
+                <a href="#" aria-label="Twitter" className="social-icon-link">
+                  <Twitter className="social-icon" />
                 </a>
               </li>
               <li>
-                <a href="#" aria-label="LinkedIn" className="hover:opacity-75 transition-opacity">
-                  <Linkedin className="w-6 h-6" />
+                <a href="#" aria-label="LinkedIn" className="social-icon-link">
+                  <Linkedin className="social-icon" />
                 </a>
               </li>
             </ul>
@@ -104,35 +219,48 @@ const ContactForm = () => {
         </aside>
 
         {/* Contact Form Section */}
-        <section className="bg-white rounded-lg shadow-xl ml-48 p-12">
-          <div className="max-w-3xl ml-32">
-            <header>
-              <h1 className="text-2xl font-bold text-blue-900 mb-2">Get in Touch</h1>
-              <p className="text-blue-600 mb-8">Feel free to drop us a line below!</p>
+        <section className={`form-section ${formSubmitted ? 'success' : ''}`}>
+          <div className="orbit-decoration"></div>
+          
+          <div className="form-container">
+            <header className="form-header">
+              <h1 className="form-title">
+                <Zap size={20} className="inline-icon" style={{ marginRight: '8px' }} />
+                Establish Communication
+              </h1>
+              <p className="form-subtitle">Transmit your request to our satellite network</p>
             </header>
             
-            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-              <div className="grid grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="contact-form" noValidate>
+              <div className="form-grid">
                 {/* Column 1 */}
-                <div className="space-y-6">
-                  <div>
+                <div className="form-column">
+                  <div className="form-group">
                     <label htmlFor="service" className="sr-only">Choose the service</label>
-                    <select
-                      id="service"
-                      name="service"
-                      value={formData.service}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg bg-blue-50 border border-blue-100 focus:outline-none focus:border-blue-500"
-                      required
-                    >
-                      <option value="">Choose the service</option>
-                      {services.map((service) => (
-                        <option key={service.id} value={service.id}>{service.title}</option>
-                      ))}
-                    </select>
+                    <div className="select-wrapper">
+                      <select
+                        id="service"
+                        name="service"
+                        value={formData.service}
+                        onChange={handleInputChange}
+                        className="form-select"
+                        required
+                      >
+                        <option value="">Select Transmission Type</option>
+                        {services.map((service) => (
+                          <option key={service.id} value={service.id}>{service.title}</option>
+                        ))}
+                      </select>
+                      {formData.service && serviceIcons[formData.service as keyof typeof serviceIcons] && 
+                        React.createElement(serviceIcons[formData.service as keyof typeof serviceIcons], { 
+                          className: 'service-select-icon',
+                          size: 20
+                        })
+                      }
+                    </div>
                   </div>
                   
-                  <div>
+                  <div className="form-group">
                     <label htmlFor="company" className="sr-only">Company</label>
                     <input
                       type="text"
@@ -140,13 +268,13 @@ const ContactForm = () => {
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      placeholder="Company"
-                      className="w-full px-4 py-3 rounded-lg bg-blue-50 border border-blue-100 focus:outline-none focus:border-blue-500"
+                      placeholder="Organization / Company"
+                      className="form-input"
                       required
                     />
                   </div>
                   
-                  <div>
+                  <div className="form-group">
                     <label htmlFor="fullName" className="sr-only">Your Full Name</label>
                     <input
                       type="text"
@@ -154,16 +282,16 @@ const ContactForm = () => {
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleInputChange}
-                      placeholder="Your Full Name"
-                      className="w-full px-4 py-3 rounded-lg bg-blue-50 border border-blue-100 focus:outline-none focus:border-blue-500"
+                      placeholder="Commander Name"
+                      className="form-input"
                       required
                     />
                   </div>
                 </div>
 
                 {/* Column 2 */}
-                <div className="space-y-6">
-                  <div>
+                <div className="form-column">
+                  <div className="form-group">
                     <label htmlFor="position" className="sr-only">Position</label>
                     <input
                       type="text"
@@ -171,13 +299,13 @@ const ContactForm = () => {
                       name="position"
                       value={formData.position}
                       onChange={handleInputChange}
-                      placeholder="Position"
-                      className="w-full px-4 py-3 rounded-lg bg-blue-50 border border-blue-100 focus:outline-none focus:border-blue-500"
+                      placeholder="Your Position / Role"
+                      className="form-input"
                       required
                     />
                   </div>
                   
-                  <div>
+                  <div className="form-group">
                     <label htmlFor="email" className="sr-only">Email to contact</label>
                     <input
                       type="email"
@@ -185,13 +313,13 @@ const ContactForm = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      placeholder="Email to contact"
-                      className="w-full px-4 py-3 rounded-lg bg-blue-50 border border-blue-100 focus:outline-none focus:border-blue-500"
+                      placeholder="Communication Channel (Email)"
+                      className="form-input"
                       required
                     />
                   </div>
                   
-                  <div>
+                  <div className="form-group">
                     <label htmlFor="phone" className="sr-only">Phone to contact</label>
                     <input
                       type="tel"
@@ -199,56 +327,56 @@ const ContactForm = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      placeholder="Phone to contact"
-                      className="w-full px-4 py-3 rounded-lg bg-blue-50 border border-blue-100 focus:outline-none focus:border-blue-500"
+                      placeholder="Backup Frequency (Phone)"
+                      className="form-input"
                       required
                     />
                   </div>
                 </div>
               </div>
 
-              <div>
+              <div className="form-group">
                 <label htmlFor="description" className="sr-only">Project description</label>
                 <textarea
                   id="description"
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
-                  placeholder="Project description"
+                  placeholder="Mission Briefing / Project Details"
                   rows={4}
-                  className="w-full px-4 py-3 rounded-lg bg-blue-50 border border-blue-100 focus:outline-none focus:border-blue-500 resize-none"
+                  className="form-textarea"
                   required
                 />
               </div>
 
-              <div className="flex flex-col space-y-2 p-4 border border-dashed border-blue-200 rounded-lg bg-blue-50">
-                <div className="flex items-center space-x-2">
-                  <Upload className="w-5 h-5 text-blue-500" aria-hidden="true" />
+              <div className="file-upload-container">
+                <div className="file-upload-header">
+                  <Upload className="upload-icon" aria-hidden="true" />
                   <input
                     type="file"
                     multiple
-                    className="hidden"
+                    className="hidden-input"
                     id="file-upload"
                     onChange={handleFileChange}
                     aria-label="Upload files"
                   />
                   <label
                     htmlFor="file-upload"
-                    className="cursor-pointer text-blue-500 hover:text-blue-600"
+                    className="file-upload-label"
                   >
-                    Attach your files
+                    Upload Mission Files
                   </label>
                 </div>
                 
                 {formData.files.length > 0 && (
-                  <div className="space-y-1">
+                  <div className="file-list">
                     {formData.files.map((file, index) => (
-                      <div key={index} className="flex items-center justify-between text-sm">
-                        <span className="text-gray-600">{file.name}</span>
+                      <div key={index} className="file-item">
+                        <span className="file-name">{file.name}</span>
                         <button
                           type="button"
                           onClick={() => removeFile(index)}
-                          className="text-red-500 hover:text-red-600"
+                          className="file-remove-button"
                         >
                           ×
                         </button>
@@ -260,9 +388,10 @@ const ContactForm = () => {
 
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-8 py-3 rounded-full hover:bg-blue-600 transition-colors font-medium"
+                className="submit-button"
               >
-                SEND
+                <span>TRANSMIT</span>
+                <div className="button-signal"></div>
               </button>
             </form>
           </div>

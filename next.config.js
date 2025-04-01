@@ -9,14 +9,13 @@ const basePath = isProd ? '/TSTLUXKOM' : '';
 const nextConfig = {
     basePath,
     assetPrefix: isProd ? `${basePath}/` : '',
-    output: 'export',
-    trailingSlash: true, // Always add trailing slashes
+    trailingSlash: true,
     images: {
         unoptimized: true,
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: '**', // Allows all HTTPS domains
+                hostname: '**',
             }
         ],
         domains: [
@@ -27,7 +26,6 @@ const nextConfig = {
         ]
     },
     
-    // Development-specific settings
     webpack: (config) => {
         // Handle SVG files
         config.module.rules.push({
@@ -37,19 +35,11 @@ const nextConfig = {
         return config;
     },
 
-    // Ensure CSS is properly extracted
     optimizeFonts: false,
-    
-    // Production optimizations
     compress: true,
     poweredByHeader: false,
     reactStrictMode: true,
     
-    // Ensure all static files are copied
-    distDir: 'out',
-    cleanDistDir: true,
-    
-    // Ensure static assets are handled correctly
     publicRuntimeConfig: {
         basePath: basePath
     }
