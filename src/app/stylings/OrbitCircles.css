@@ -1,12 +1,13 @@
 .orbit-container {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
+  top: 125%;
+  right: -25%;
+  transform: translate(0, -100%);
+  width: 50vw; /* Take up right half of the screen */
   height: 100vh;
   pointer-events: none;
   z-index: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Orbit circles styling */
@@ -32,7 +33,6 @@
   animation: rotate2 55s linear infinite reverse;
 }
 
-
 /* Orbit icons */
 .orbit-icons {
   position: absolute;
@@ -42,21 +42,69 @@
 
 .orbit-icon {
   position: absolute;
-  color: rgba(255, 255, 255, 0.2);
   width: 24px;
   height: 24px;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
 }
 
-/* Position icons around the circles */
-.orbit-circle-1 .orbit-icon:nth-child(1) { top: 0; left: 50%; transform: translate(-50%, -50%); }
-.orbit-circle-1 .orbit-icon:nth-child(2) { right: 0; top: 50%; transform: translate(50%, -50%); }
-.orbit-circle-1 .orbit-icon:nth-child(3) { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
-.orbit-circle-1 .orbit-icon:nth-child(4) { left: 0; top: 50%; transform: translate(-50%, -50%); }
+/* Position and color icons around the circles */
+.orbit-circle-1 .orbit-icon:nth-child(1) { 
+  top: 0; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  color: #3b82f6;
+  opacity: 0.5;
+}
+.orbit-circle-1 .orbit-icon:nth-child(2) { 
+  right: 0; 
+  top: 50%; 
+  transform: translate(50%, -50%);
+  color: #00FF9F;
+  opacity: 0.5;
+}
+.orbit-circle-1 .orbit-icon:nth-child(3) { 
+  bottom: 0; 
+  left: 50%; 
+  transform: translate(-50%, 50%);
+  color: #FFD700;
+  opacity: 0.5;
+}
+.orbit-circle-1 .orbit-icon:nth-child(4) { 
+  left: 0; 
+  top: 50%; 
+  transform: translate(-50%, -50%);
+  color: #40E0D0;
+  opacity: 0.5;
+}
 
-.orbit-circle-2 .orbit-icon:nth-child(1) { top: 0; left: 50%; transform: translate(-50%, -50%); }
-.orbit-circle-2 .orbit-icon:nth-child(2) { right: 0; top: 50%; transform: translate(50%, -50%); }
-.orbit-circle-2 .orbit-icon:nth-child(3) { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
-.orbit-circle-2 .orbit-icon:nth-child(4) { left: 0; top: 50%; transform: translate(-50%, -50%); }
+.orbit-circle-2 .orbit-icon:nth-child(1) { 
+  top: 0; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  color: #9370DB;
+  opacity: 0.5;
+}
+.orbit-circle-2 .orbit-icon:nth-child(2) { 
+  right: 0; 
+  top: 50%; 
+  transform: translate(50%, -50%);
+  color: #3b82f6;
+  opacity: 0.5;
+}
+.orbit-circle-2 .orbit-icon:nth-child(3) { 
+  bottom: 0; 
+  left: 50%; 
+  transform: translate(-50%, 50%);
+  color: #00FF9F;
+  opacity: 0.5;
+}
+.orbit-circle-2 .orbit-icon:nth-child(4) { 
+  left: 0; 
+  top: 50%; 
+  transform: translate(-50%, -50%);
+  color: #FFD700;
+  opacity: 0.5;
+}
 
 @keyframes rotate1 {
   from { transform: translate(-50%, -50%) rotate(0deg); }
