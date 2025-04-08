@@ -4,6 +4,7 @@ import "./globals.css";
 import "./stylings/layout.css";
 import { Header } from "@/components/Header";
 import SatelliteScene from "@/components/SatelliteScene";
+import OrbitCircles from '@/components/ui/OrbitCircles';
 // import Footer from "@/components/Footer";
 
 const inter = Inter({
@@ -34,6 +35,7 @@ export default function RootLayout({
           flexDirection: 'column'
         }}
       >
+        <OrbitCircles />
         <SatelliteScene />
         <div className="sticky-header">
           <Header />

@@ -34,77 +34,9 @@ export default function HeroSection() {
   return (
     <section className="hero-section" ref={sectionRef}>
             
-      {/* Decorative circles with motion */}
-      <motion.div 
-        className="decorative-circle-1"
-        animate={{ 
-          y: [-20, 20],
-          transition: {
-            duration: 100,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }
-        }}
-      />
-      <motion.div 
-        className="decorative-circle-2"
-        animate={{ 
-          y: [20, -20],
-          transition: {
-            duration: 3.5,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }
-        }}
-      />
-      <motion.div 
-        className="decorative-circle-3"
-        animate={{ 
-          y: [-15, 15],
-          transition: {
-            duration: 3,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }
-        }}
-      />
-      <motion.div 
-        className="decorative-circle-4"
-        animate={{ 
-          y: [15, -15],
-          transition: {
-            duration: 4.5,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }
-        }}
-      />
+   
       
-      {/* Orbit circles */}
-      <motion.div 
-        className="orbit-circle orbit-circle-1"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      >
-        <div className="orbit-icons">
-          <Satellite className="orbit-icon" />
-          <Wifi className="orbit-icon" />
-          <Globe className="orbit-icon" />
-          <Shield className="orbit-icon" />
-        </div>
-      </motion.div>
-      <motion.div 
-        className="orbit-circle orbit-circle-2"
-        animate={{ rotate: -360 }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-      >
-        <div className="orbit-icons">
-          <Rocket className="orbit-icon" />
-          <Antenna className="orbit-icon" />
-          <Signal className="orbit-icon" />
-          <Network className="orbit-icon" />
-        </div>
-      </motion.div>
+      
       
       <div className="hero-container">
         <div className="hero-content-wrapper">

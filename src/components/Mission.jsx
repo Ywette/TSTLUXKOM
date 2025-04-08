@@ -39,14 +39,17 @@ export function Mission() {
 
   const values = [
     {
+      icon: <StarIcon className="value-icon" />,
       title: "Excellence",
       description: "We strive for excellence in everything we do, delivering the highest quality solutions and services to our clients."
     },
     {
+      icon: <RocketIcon className="value-icon" />,
       title: "Innovation",
       description: "We embrace innovation and cutting-edge technology to provide forward-thinking solutions that drive business success."
     },
     {
+      icon: <EyeIcon className="value-icon" />,
       title: "Integrity",
       description: "We maintain the highest standards of integrity, ensuring trust and reliability in all our business relationships."
     }
@@ -59,16 +62,37 @@ export function Mission() {
           className="mission-content"
           style={{ opacity, y }}
         >
+          {/* Company History Card */}
+          <animated.div 
+            className="history-card"
+            style={springProps}
+          >
+            <div className="card-header">
+              <h2 className="card-title">Our Journey to the Stars</h2>
+            </div>
+            <div className="history-content">
+              <p>
+                Founded in 2020, TST LUXKOM emerged as a visionary force in satellite communications. 
+                From our humble beginnings in Luxembourg, we've grown into a trusted partner for global SATCOM solutions, 
+                combining technical expertise with innovative approaches to meet the evolving needs of the space industry.
+              </p>
+            </div>
+          </animated.div>
+
+          {/* Core Values Card */}
           <animated.div 
             className="core-values-card"
             style={springProps}
           >
             <div className="card-header">
-              <h2 className="card-title">About Us</h2>
+              <h2 className="card-title">Core Values</h2>
             </div>
             <div className="values-container">
               {values.map((value, index) => (
                 <div key={value.title} className="value-card">
+                  <div className="value-icon-wrapper">
+                    {value.icon}
+                  </div>
                   <h3 className="value-title">{value.title}</h3>
                   <p className="value-description">{value.description}</p>
                 </div>
