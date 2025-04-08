@@ -19,20 +19,19 @@ export default async function ServicePage({ params }: Props) {
   const serviceName = params.serviceName
   
   const service = services.find(s => s.web === serviceName)
-
-
+  
   if (!service) {
     notFound()
   }
 
   return (
-    <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold">{service.title}</h1>
-      <p className="mt-4">{service.description}</p>
+    <main>
+      <h1>{service.title}</h1>
+      <p>{service.description}</p>
       {service.features && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold">Features</h2>
-          <ul className="mt-4 space-y-2">
+        <div>
+          <h2>Features</h2>
+          <ul>
             {service.features.map((feature, index) => (
               <li key={index}>{feature}</li>
             ))}

@@ -4,8 +4,8 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: var(--bg-primary);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: transparent;
+  box-shadow: none;
 }
 
 .main-content {
@@ -13,6 +13,7 @@
   min-height: calc(100vh - 80px);
   width: 100%;
   position: relative;
+  z-index: 1;
 }
 
 /* Ensure each section takes full height */
@@ -24,4 +25,5 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: transparent;
 } 

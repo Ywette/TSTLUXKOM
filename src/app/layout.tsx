@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "./stylings/layout.css";
 import { Header } from "@/components/Header";
+import SatelliteScene from "@/components/SatelliteScene";
 // import Footer from "@/components/Footer";
 
 const inter = Inter({
@@ -25,7 +26,6 @@ export default function RootLayout({
       <body
         className={`${inter.variable} antialiased`}
         style={{
-          backgroundColor: 'var(--bg-primary)',
           color: 'var(--text-on-dark)',
           margin: 0,
           padding: 0,
@@ -34,9 +34,11 @@ export default function RootLayout({
           flexDirection: 'column'
         }}
       >
+        <SatelliteScene />
         <div className="sticky-header">
           <Header />
         </div>
+        
         <main className="main-content">
           {children}
         </main>

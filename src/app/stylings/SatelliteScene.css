@@ -1,0 +1,70 @@
+/* SatelliteScene.css */
+
+/* Make the satellite scene fixed and cover the entire viewport */
+.satellite-scene {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Place it behind other content */
+  pointer-events: none; /* Allow clicks to pass through to content below */
+}
+
+/* Ensure the canvas takes up 100% of the container */
+.satellite-scene canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Interactive gradient overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.15) 0%,
+    rgba(147, 51, 234, 0.15) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradient-move 15s ease infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add these styles to your global CSS or body styles */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-on-dark);
+  background-color: var(--primary-color);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Make content appear above the background scene */
+#__next, /* For Next.js */
+.app-container, /* Add a container class to your main app div */
+main {
+  position: relative;
+  z-index: 1;
+}

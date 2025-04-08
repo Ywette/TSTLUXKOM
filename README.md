@@ -106,3 +106,8 @@ Quality Gates:
 1 hero section pictures for every services description separately (+4 in total as minimum)
 
 CSS for card movements in  
+
+##ideas
+- smalkas līnijas
+- TSTLUXKOM burti fonā (elegant piemeers) paraadaas kaa MASK piemeers ar clipart Create an Awesome Text Reveal Animation with GSAP
+

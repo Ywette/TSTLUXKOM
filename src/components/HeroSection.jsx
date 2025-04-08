@@ -1,64 +1,180 @@
 'use client';
-import React from 'react';
-import Button from './ui/Button';
+
+import React, { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { Satellite, Wifi, Globe, Shield, Rocket, Antenna, Signal, Network } from 'lucide-react';
 import Link from 'next/link';
+import Button from '../components/ui/Button';
+
 import '../app/stylings/HeroSection.css';
 
-function HeroSection() {
-  const isProd = process.env.NODE_ENV === 'production';
-  const basePath = isProd ? '/TSTLUXKOM' : '';
-
+export default function HeroSection() {
+  const sectionRef = useRef(null);
+  
+  // Section visibility for animation on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+      
+      const rect = section.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+      
+      if (!isVisible) {
+        section.classList.add('section-hidden');
+      } else {
+        section.classList.remove('section-hidden');
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
   return (
-    <section className="hero-section">
-      {/* Animated gradient background */}
-      <div className="hero-gradient-bg"></div>
-
-      {/* Decorative circles */}
-      <div className="decorative-circle-1"></div>
-      <div className="decorative-circle-2"></div>
-
+    <section className="hero-section" ref={sectionRef}>
+            
+      {/* Decorative circles with motion */}
+      <motion.div 
+        className="decorative-circle-1"
+        animate={{ 
+          y: [-20, 20],
+          transition: {
+            duration: 100,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }
+        }}
+      />
+      <motion.div 
+        className="decorative-circle-2"
+        animate={{ 
+          y: [20, -20],
+          transition: {
+            duration: 3.5,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }
+        }}
+      />
+      <motion.div 
+        className="decorative-circle-3"
+        animate={{ 
+          y: [-15, 15],
+          transition: {
+            duration: 3,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }
+        }}
+      />
+      <motion.div 
+        className="decorative-circle-4"
+        animate={{ 
+          y: [15, -15],
+          transition: {
+            duration: 4.5,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }
+        }}
+      />
+      
+      {/* Orbit circles */}
+      <motion.div 
+        className="orbit-circle orbit-circle-1"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      >
+        <div className="orbit-icons">
+          <Satellite className="orbit-icon" />
+          <Wifi className="orbit-icon" />
+          <Globe className="orbit-icon" />
+          <Shield className="orbit-icon" />
+        </div>
+      </motion.div>
+      <motion.div 
+        className="orbit-circle orbit-circle-2"
+        animate={{ rotate: -360 }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+      >
+        <div className="orbit-icons">
+          <Rocket className="orbit-icon" />
+          <Antenna className="orbit-icon" />
+          <Signal className="orbit-icon" />
+          <Network className="orbit-icon" />
+        </div>
+      </motion.div>
+      
       <div className="hero-container">
         <div className="hero-content-wrapper">
-          <div className="hero-content">
-            <h1 className="hero-title">
+          <motion.div 
+            className="hero-content"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.h1 
+              className="hero-title"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
               Your Partner for
               <br />
               <span className="hero-highlight">SATCOM Projects</span>
-            </h1>
+            </motion.h1>
+            
+            <motion.p 
+              className="hero-description"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+            >
+              Whether you're looking to enhance your service management, install or refurbish antennas, or optimize your RF equipment, we've got you covered.
 
-            <p className="hero-description">
-              Whether you're looking to enhance your service management, install or refurbish antennas, or optimize your RF equipment, we've got you covered. </p>
-              <p className="hero-description">At TST LUXKOM, we specialize in delivering seamless, reliable, and high-performance satellite communication solutions.
-            </p>
-
-            <div className="hero-buttons">
-              <Link href={`${basePath}/#services`}>
-                <Button
-                  className="text-lg px-8 py-4 font-semibold text-text-light w-full sm:w-auto"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
+At TST LUXKOM, we specialize in delivering seamless, reliable, and high-performance satellite communication solutions.
+              </motion.p>
+            
+            <motion.div 
+              className="hero-buttons"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.9, duration: 0.8 }}
+            >
+              <Link href="#services">
+                <Button onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+                }}>
                   Discover Services
                 </Button>
               </Link>
-              <Link href={`${basePath}/contact`}>
-                <Button className="text-lg px-8 py-4 font-semibold border-2 border-accent-highlight bg-transparent hover:bg-accent-highlight/10 text-accent-highlight w-full sm:w-auto transition-colors">
+              <Link href="/contact">
+                <Button className="secondary-button">
                   Tell About Your Project
                 </Button>
               </Link>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-
+        
         {/* Scroll indicator */}
-        {/* <div className="scroll-indicator">
-          <div className="scroll-indicator-line"></div>
-        </div> */}
+        <motion.div 
+          className="scroll-indicator"
+          initial={{ opacity: 0 }}
+          animate={{ 
+            opacity: 1,
+            y: [0, 10, 0]
+          }}
+          transition={{
+            opacity: { delay: 1.2, duration: 0.8 },
+            y: { duration: 2, repeat: Infinity, repeatType: "loop" }
+          }}
+        >
+          <div className="scroll-indicator-arrow"></div>
+        </motion.div>
       </div>
     </section>
   );
 }
-
-export default HeroSection;
