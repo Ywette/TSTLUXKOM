@@ -1,22 +1,25 @@
 'use client';
 
 import { services } from '@/data/services';
-import Button from './ui/Button';
-import Link from 'next/link';
-import Image from 'next/image';
 import { Cog, BarChart3, HeadphonesIcon, Code } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
+import '@/app/stylings/ServicesList.css';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const getIconForService = (serviceId) => {
   switch (serviceId) {
     case "1":
-      return <Cog className="w-8 h-8 text-accent-highlight transition-all duration-300 group-hover:rotate-90" />;
+      return <Cog className="service-icon service-icon-cog" />;
     case "2":
-      return <BarChart3 className="w-8 h-8 text-accent-highlight transition-all duration-300 group-hover:scale-110" />;
+      return <BarChart3 className="service-icon service-icon-chart" />;
     case "3":
-      return <HeadphonesIcon className="w-8 h-8 text-accent-highlight transition-all duration-300 group-hover:scale-110" />;
+      return <HeadphonesIcon className="service-icon service-icon-headphones" />;
     case "4":
-      return <Code className="w-8 h-8 text-accent-highlight transition-all duration-300 group-hover:scale-110" />;
+      return <Code className="service-icon service-icon-code" />;
     default:
       return null;
   }
@@ -24,99 +27,114 @@ const getIconForService = (serviceId) => {
 
 export function ServicesList() {
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [allCardsVisible, setAllCardsVisible] = useState(false);
   const containerRef = useRef(null);
+  const cardsRef = useRef([]);
 
   useEffect(() => {
-    // Set all cards visible after a short delay
-    const timer = setTimeout(() => {
-      setAllCardsVisible(true);
-    }, 1000); // Increased delay to ensure CSS is loaded
+    if (!containerRef.current) return;
 
-    return () => clearTimeout(timer);
+    const cards = cardsRef.current;
+    
+    // Initial state - cards are hidden below the screen
+    gsap.set(cards, {
+      y: '100vh',
+      opacity: 0
+    });
+
+    // Create ScrollTrigger for the container
+    ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top 80%",
+      onEnter: () => {
+        // Animate each card with a quick stagger effect and bounce
+        cards.forEach((card, index) => {
+          gsap.to(card, {
+            y: -50, // Move up slightly past the final position
+            opacity: 1,
+            duration: 0.6,
+            delay: index * 0.15,
+            ease: "power2.out",
+            onComplete: () => {
+              // Bounce back to final position
+              gsap.to(card, {
+                y: 0,
+                duration: 0.3,
+                ease: "bounce.out"
+              });
+            }
+          });
+        });
+      }
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
+  const handleCardClick = (webRoute) => {
+    window.location.href = `/services/${webRoute}`;
+  };
+
   return (
-    <section id="services" className="relative overflow-hidden py-24">
+    <section id="services" className="services-section">
       {/* Background effects */}
-      <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-blue-600/5 to-purple-600/5"></div>
-      <div className="absolute top-40 left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-40 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="section-bg-gradient"></div>
+      <div className="section-bg-blur section-bg-blur-top"></div>
+      <div className="section-bg-blur section-bg-blur-bottom"></div>
 
       {/* Content */}
-      <div className="container mx-auto px-6 relative z-10 my-10">
+      <div className="section-container">
         {/* Section Header */}
-        <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-text-light mb-6 relative inline-block">
+        <div className="section-header">
+          <h2 className="section-title">
             Our Services
-            <span className="absolute left-0 bottom-0 w-full h-1 bg-gradient-to-r from-transparent via-accent-highlight/50 to-transparent rounded-full"></span>
+            <span className="section-title-underline"></span>
           </h2>
-          {/* <p className="text-xl text-text-light/80 max-w-3xl mx-auto">
-            Comprehensive solutions tailored to empower your business in the digital age
-          </p> */}
         </div>
 
         {/* Services Grid */}
         <div 
           ref={containerRef}
-          className={`services-container ${allCardsVisible ? 'all-visible animate-fade-in' : ''}`}
+          className="services-container"
           data-hovered={hoveredCard}
         >
           {services.map((service, index) => (
             <div
               key={service.id}
-              className={`
-                service-card
-                bg-white/5 backdrop-blur-sm rounded-2xl
-                cursor-pointer
-                ${allCardsVisible ? 'opacity-100' : 'opacity-0'}
-                ${hoveredCard === service.id ? 'hovered' : ''}
-              `}
-              style={{
-                transitionDelay: hoveredCard ? '0ms' : `${index * 200}ms`,
-                animationDelay: `${1.3 + index * 0.2}s`
-              }}
+              ref={el => cardsRef.current[index] = el}
+              className={`service-card ${hoveredCard === service.id ? 'hovered' : ''}`}
               onMouseEnter={() => setHoveredCard(service.id)}
               onMouseLeave={() => setHoveredCard(null)}
-              onClick={() => {
-                const serviceRoutes = {
-                  "1": "/services/software-development",
-                  "2": "/services/data-analytics",
-                  "3": "/services/customer-support",
-                  "4": "/services/web-development"
-                };
-                window.location.href = serviceRoutes[service.id];
-              }}
+              onClick={() => handleCardClick(service.web)}
             >
-              <div className="px-8 py-12 h-full flex flex-col">
-                <div className="mb-6 flex justify-between items-center">
-                  <div className="flex items-center">
-                    {getIconForService(service.id)}
-                  </div>
+              <div className="service-card-header">
+                <div className="service-icon-wrapper">
+                  {getIconForService(service.id)}
                 </div>
-                
-                <h3 className="text-2xl font-bold text-accent-highlight mb-4 uppercase">
-                  {service.title}
-                </h3>
-                
-                <p className="text-lg text-text-light/80 mb-6 group-hover:text-text-light/90">
-                  {service.description}
-                </p>
+              </div>
+              
+              <h3 className="service-card-title">
+                {service.title}
+              </h3>
+              
+              <p className="service-card-description">
+                {service.description}
+              </p>
 
-                {service.features && (
-                  <ul className="space-y-3 flex-grow">
+              {service.features && (
+                <div className="service-features">
+                  <h4 className="service-features-title">Features</h4>
+                  <ul className="service-features-list">
                     {service.features.map((feature, idx) => (
-                      <li 
-                        key={idx} 
-                        className="flex items-start space-x-3 text-text-light/80"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent-highlight mt-2.5"></span>
-                        <span>{feature}</span>
+                      <li key={`feature-${idx}`} className="service-feature-item">
+                        <span className="service-feature-bullet"></span>
+                        <span className="service-feature-text">{feature}</span>
                       </li>
                     ))}
                   </ul>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           ))}
         </div>

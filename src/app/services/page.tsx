@@ -17,6 +17,7 @@ export default function ServicesPage() {
                     >
                         <h2>{service.title}</h2>
                         <p>{service.description}</p>
+                        <p>This is one service page</p>
                     </div>
                 ))}
             </div>

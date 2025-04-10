@@ -1,13 +1,15 @@
 .orbit-container {
   position: fixed;
-  top: 125%;
-  right: -25%;
-  transform: translate(0, -100%);
-  width: 50vw; /* Take up right half of the screen */
+  top: 0;
+  right: -50vw; /* Move container so half is off-screen */
+  width: 100vw;
   height: 100vh;
   pointer-events: none;
   z-index: 0;
-  overflow: visible;
+  overflow: visible; /* Allow content to be visible outside container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Orbit circles styling */
@@ -19,17 +21,18 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  aspect-ratio: 1/1; /* Ensures circles are perfectly round */
 }
 
 .orbit-circle-1 {
-  width: 1200px;
-  height: 1200px;
+  width: min(60vw, 60vh);
+  height: min(60vw, 60vh);
   animation: rotate1 40s linear infinite;
 }
 
 .orbit-circle-2 {
-  width: 1500px;
-  height: 1500px;
+  width: min(80vw, 80vh);
+  height: min(80vw, 80vh);
   animation: rotate2 55s linear infinite reverse;
 }
 
@@ -38,6 +41,8 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
 }
 
 .orbit-icon {
@@ -116,36 +121,16 @@
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-@keyframes rotate3 {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-@keyframes rotate4 {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(-360deg); }
-}
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .orbit-circle-1 {
-    width: 800px;
-    height: 800px;
+    width: min(70vw, 70vh);
+    height: min(70vw, 70vh);
   }
   
   .orbit-circle-2 {
-    width: 1000px;
-    height: 1000px;
-  }
-  
-  .orbit-circle-3 {
-    width: 1200px;
-    height: 1200px;
-  }
-  
-  .orbit-circle-4 {
-    width: 1400px;
-    height: 1400px;
+    width: min(90vw, 90vh);
+    height: min(90vw, 90vh);
   }
   
   .decorative-circle-1,
@@ -159,15 +144,14 @@
 
 @media (max-width: 480px) {
   .orbit-circle-1 {
-    width: 600px;
-    height: 600px;
+    width: min(80vw, 80vh);
+    height: min(80vw, 80vh);
   }
   
   .orbit-circle-2 {
-    width: 800px;
-    height: 800px;
+    width: min(95vw, 95vh);
+    height: min(95vw, 95vh);
   }
-  
   
   .decorative-circle-1,
   .decorative-circle-2,
