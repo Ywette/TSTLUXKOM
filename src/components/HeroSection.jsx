@@ -32,12 +32,7 @@ export default function HeroSection() {
   }, []);
   
   return (
-    <section className="hero-section" ref={sectionRef}>
-            
-   
-      
-      
-      
+    <section className="hero-section" ref={sectionRef}>     
       <div className="hero-container">
         <div className="hero-content-wrapper">
           <motion.div 
@@ -52,8 +47,8 @@ export default function HeroSection() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              Your Partner for
-              <br />
+              TSTLUXKOM - Your Partner for
+              
               <span className="hero-highlight">SATCOM Projects</span>
             </motion.h1>
             

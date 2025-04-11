@@ -1,25 +1,33 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { RocketIcon, EyeIcon, StarIcon } from 'lucide-react'
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from '@react-spring/web';
 import { usePathname } from 'next/navigation';
 import '../app/stylings/Mission.css';
+import WifiAnimation from './ui/WiFiAnimation';
+
+const AnimatedText = ({ text }) => {
+  return (
+    <div className="animated-title-container">
+      <h2 className="animated-title">
+        {text}
+      </h2>
+    </div>
+  );
+};
 
 // Fun animated Mission component
 export function Mission() {
   const { scrollYProgress } = useScroll();
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1
+    threshold: 0.2
   });
   const pathname = usePathname();
   const isProd = process.env.NODE_ENV === 'production';
   const basePath = isProd ? '/TSTLUXKOM' : '';
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
-  const y = useTransform(scrollYProgress, [0, 0.2], [50, 0]);
 
   const springProps = useSpring({
     opacity: inView ? 1 : 0,
@@ -57,18 +65,24 @@ export function Mission() {
 
   return (
     <section id="about" className="mission-section" ref={ref}>
+      {inView && (
+        <WifiAnimation 
+          color="#FF69B4"
+          thickness={1}
+          arcCount={12}
+          threshold={0.2}
+          triggerOnce={true}
+        />
+      )}
       <div className="mission-container">
-        <motion.div 
-          className="mission-content"
-          style={{ opacity, y }}
-        >
+        <div className="mission-content">
           {/* Company History Card */}
           <animated.div 
             className="history-card"
             style={springProps}
           >
             <div className="card-header">
-              <h2 className="card-title">Our Journey to the Stars</h2>
+              <AnimatedText text="Our Journey to the Stars" />
             </div>
             <div className="history-content">
               <p>
@@ -85,7 +99,7 @@ export function Mission() {
             style={springProps}
           >
             <div className="card-header">
-              <h2 className="card-title">Core Values</h2>
+              <AnimatedText text="Core Values" />
             </div>
             <div className="values-container">
               {values.map((value, index) => (
@@ -99,7 +113,7 @@ export function Mission() {
               ))}
             </div>
           </animated.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

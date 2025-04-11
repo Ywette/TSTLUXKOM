@@ -29,48 +29,54 @@ export function ServicesList() {
   const [hoveredCard, setHoveredCard] = useState(null);
   const containerRef = useRef(null);
   const cardsRef = useRef([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    // Check if we're on mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1023);
+    };
 
-    const cards = cardsRef.current;
-    
-    // Initial state - cards are hidden below the screen
-    gsap.set(cards, {
-      y: '100vh',
-      opacity: 0
-    });
+    // Initial check
+    checkMobile();
 
-    // Create ScrollTrigger for the container
-    ScrollTrigger.create({
-      trigger: containerRef.current,
-      start: "top 80%",
-      onEnter: () => {
-        // Animate each card with a quick stagger effect and bounce
-        cards.forEach((card, index) => {
-          gsap.to(card, {
-            y: -50, // Move up slightly past the final position
-            opacity: 1,
-            duration: 0.6,
-            delay: index * 0.15,
-            ease: "power2.out",
-            onComplete: () => {
-              // Bounce back to final position
-              gsap.to(card, {
-                y: 0,
-                duration: 0.3,
-                ease: "bounce.out"
-              });
-            }
+    // Add resize listener
+    window.addEventListener('resize', checkMobile);
+
+    // Only setup animations if not mobile
+    if (!isMobile && containerRef.current) {
+      const cards = cardsRef.current;
+      
+      // Initial state - cards are hidden below the screen
+      gsap.set(cards, {
+        y: '100vh',
+        opacity: 0
+      });
+
+      // Create ScrollTrigger for the container
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: "top 80%",
+        onEnter: () => {
+          // Animate each card with a quick stagger effect
+          cards.forEach((card, index) => {
+            gsap.to(card, {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              delay: index * 0.15,
+              ease: "power2.out"
+            });
           });
-        });
-      }
-    });
+        }
+      });
+    }
 
     return () => {
+      window.removeEventListener('resize', checkMobile);
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, []);
+  }, [isMobile]);
 
   const handleCardClick = (webRoute) => {
     window.location.href = `/services/${webRoute}`;
@@ -96,7 +102,7 @@ export function ServicesList() {
         {/* Services Grid */}
         <div 
           ref={containerRef}
-          className="services-container"
+          className={`services-container ${isMobile ? 'mobile' : ''}`}
           data-hovered={hoveredCard}
         >
           {services.map((service, index) => (
@@ -104,8 +110,8 @@ export function ServicesList() {
               key={service.id}
               ref={el => cardsRef.current[index] = el}
               className={`service-card ${hoveredCard === service.id ? 'hovered' : ''}`}
-              onMouseEnter={() => setHoveredCard(service.id)}
-              onMouseLeave={() => setHoveredCard(null)}
+              onMouseEnter={() => !isMobile && setHoveredCard(service.id)}
+              onMouseLeave={() => !isMobile && setHoveredCard(null)}
               onClick={() => handleCardClick(service.web)}
             >
               <div className="service-card-header">

@@ -1,0 +1,34 @@
+.container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .wifiArc {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    opacity: 0;
+  }
+  
+  .wifiArc path {
+    fill: none;
+    stroke-linecap: round;
+  }
+  
+  @keyframes fadeInOnce {
+    0%, 5% {
+      opacity: 0;
+    }
+    20%, 30% {
+      opacity: 1;
+    }
+    45%, 100% {
+      opacity: 0;
+    }
+  }
+  
+  .wifiArc.animate {
+    animation: fadeInOnce 5s forwards;
+  }
