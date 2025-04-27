@@ -1,25 +1,22 @@
 'use client';
 
+import React from 'react';
 import { services } from '@/data/services';
 import { Cog, BarChart3, HeadphonesIcon, Code } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-import '@/app/stylings/ServicesList.css';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { useState, useRef, useEffect } from 'react';
+import '../app/stylings/ServicesList.css';
 
 const getIconForService = (serviceId) => {
+  const className = 'service-icon';
   switch (serviceId) {
-    case "1":
-      return <Cog className="service-icon service-icon-cog" />;
-    case "2":
-      return <BarChart3 className="service-icon service-icon-chart" />;
-    case "3":
-      return <HeadphonesIcon className="service-icon service-icon-headphones" />;
-    case "4":
-      return <Code className="service-icon service-icon-code" />;
+    case '1':
+      return <Cog className={className + ' rotate-effect'} />;
+    case '2':
+      return <BarChart3 className={className + ' scale-effect'} />;
+    case '3':
+      return <HeadphonesIcon className={className + ' scale-effect'} />;
+    case '4':
+      return <Code className={className + ' scale-effect'} />;
     default:
       return null;
   }
@@ -27,124 +24,97 @@ const getIconForService = (serviceId) => {
 
 export function ServicesList() {
   const [hoveredCard, setHoveredCard] = useState(null);
-  const containerRef = useRef(null);
-  const cardsRef = useRef([]);
-  const [isMobile, setIsMobile] = useState(false);
+  const [maxHeight, setMaxHeight] = useState(0);
+  const cardRefs = useRef([]);
 
   useEffect(() => {
-    // Check if we're on mobile
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1023);
+    // Reset refs array
+    cardRefs.current = cardRefs.current.slice(0, services.length);
+    
+    // Calculate max height from all cards
+    const calculateMaxHeight = () => {
+      const heights = cardRefs.current
+        .filter(ref => ref) // Filter out null refs
+        .map(ref => ref.scrollHeight);
+      const newMaxHeight = Math.max(...heights);
+      if (newMaxHeight !== maxHeight) {
+        setMaxHeight(newMaxHeight);
+      }
     };
 
-    // Initial check
-    checkMobile();
+    calculateMaxHeight();
+    // Recalculate on window resize
+    window.addEventListener('resize', calculateMaxHeight);
+    return () => window.removeEventListener('resize', calculateMaxHeight);
+  }, []);
 
-    // Add resize listener
-    window.addEventListener('resize', checkMobile);
-
-    // Only setup animations if not mobile
-    if (!isMobile && containerRef.current) {
-      const cards = cardsRef.current;
-      
-      // Initial state - cards are hidden below the screen
-      gsap.set(cards, {
-        y: '100vh',
-        opacity: 0
-      });
-
-      // Create ScrollTrigger for the container
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top 80%",
-        onEnter: () => {
-          // Animate each card with a quick stagger effect
-          cards.forEach((card, index) => {
-            gsap.to(card, {
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              delay: index * 0.15,
-              ease: "power2.out"
-            });
-          });
-        }
-      });
-    }
-
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, [isMobile]);
-
-  const handleCardClick = (webRoute) => {
-    window.location.href = `/services/${webRoute}`;
-  };
+  const nonHovered = services.filter((s) => s.id !== hoveredCard);
+  const hovered = services.find((s) => s.id === hoveredCard);
 
   return (
     <section id="services" className="services-section">
-      {/* Background effects */}
-      <div className="section-bg-gradient"></div>
-      <div className="section-bg-blur section-bg-blur-top"></div>
-      <div className="section-bg-blur section-bg-blur-bottom"></div>
-
-      {/* Content */}
-      <div className="section-container">
-        {/* Section Header */}
+      <div className="container">
         <div className="section-header">
-          <h2 className="section-title">
-            Our Services
-            <span className="section-title-underline"></span>
-          </h2>
+          <h2 className="section-title">Our Services</h2>
         </div>
 
-        {/* Services Grid */}
-        <div 
-          ref={containerRef}
-          className={`services-container ${isMobile ? 'mobile' : ''}`}
-          data-hovered={hoveredCard}
-        >
-          {services.map((service, index) => (
-            <div
+        <div className="stacked-services" style={{ height: maxHeight }}>
+          {nonHovered.map((service, index) => (
+            <ServiceCard
               key={service.id}
-              ref={el => cardsRef.current[index] = el}
-              className={`service-card ${hoveredCard === service.id ? 'hovered' : ''}`}
-              onMouseEnter={() => !isMobile && setHoveredCard(service.id)}
-              onMouseLeave={() => !isMobile && setHoveredCard(null)}
-              onClick={() => handleCardClick(service.web)}
-            >
-              <div className="service-card-header">
-                <div className="service-icon-wrapper">
-                  {getIconForService(service.id)}
-                </div>
-              </div>
-              
-              <h3 className="service-card-title">
-                {service.title}
-              </h3>
-              
-              <p className="service-card-description">
-                {service.description}
-              </p>
-
-              {service.features && (
-                <div className="service-features">
-                  <h4 className="service-features-title">Features</h4>
-                  <ul className="service-features-list">
-                    {service.features.map((feature, idx) => (
-                      <li key={`feature-${idx}`} className="service-feature-item">
-                        <span className="service-feature-bullet"></span>
-                        <span className="service-feature-text">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
+              service={service}
+              setHoveredCard={setHoveredCard}
+              ref={el => cardRefs.current[index] = el}
+              height={maxHeight}
+            />
           ))}
+          {hovered && (
+            <ServiceCard
+              key={hovered.id}
+              service={hovered}
+              setHoveredCard={setHoveredCard}
+              ref={el => cardRefs.current[services.findIndex(s => s.id === hovered.id)] = el}
+              height={maxHeight}
+            />
+          )}
         </div>
       </div>
     </section>
   );
 }
+
+const ServiceCard = React.forwardRef(({ service, setHoveredCard, height }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className="service-card"
+      style={{ 
+        left: `${5 + 23 * (parseInt(service.id) - 1)}%`,
+        height: height ? `${height}px` : 'auto'
+      }}
+      onMouseEnter={() => setHoveredCard(service.id)}
+      onMouseLeave={() => setHoveredCard(null)}
+      onClick={() => {
+        window.location.href = `/services/${service.web}`;
+      }}
+    >
+      <div className="service-card-content">
+        <div className="service-icon-wrapper">
+          {getIconForService(service.id)}
+        </div>
+        <h3 className="service-title">{service.title}</h3>
+        <p className="service-description">{service.description}</p>
+        {service.features && (
+          <ul className="service-features">
+            {service.features.map((feature, idx) => (
+              <li key={idx} className="service-feature">
+                <span className="feature-dot"></span>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+});

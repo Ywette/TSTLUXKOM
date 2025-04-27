@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "target": "es5",
     "lib": [
       "dom",
@@ -34,7 +38,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "out/types/**/*.ts"
-  ],
+, "src/components/ui/OrbitCircles.jsx"  ],
   "exclude": [
     "node_modules"
   ]

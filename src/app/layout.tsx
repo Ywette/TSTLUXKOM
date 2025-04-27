@@ -4,7 +4,7 @@ import "./globals.css";
 import "./stylings/layout.css";
 import { Header } from "@/components/Header";
 import SatelliteScene from "@/components/SatelliteScene";
-import OrbitCircles from '@/components/ui/OrbitCircles';
+import OrbitCircles from '@/components/ui/OrbitCircles.jsx';
 // import Footer from "@/components/Footer";
 
 const inter = Inter({

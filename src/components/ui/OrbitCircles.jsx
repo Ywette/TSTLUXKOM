@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Satellite, Wifi, Globe, Shield, Rocket, Antenna, Signal, Network } from 'lucide-react';
 import '../../app/stylings/animations/OrbitCircles.css';
 
-const OrbitCircles: React.FC = () => {
+const OrbitCircles = () => {
   return (
     <>
       {/* Decorative background blur circles */}
