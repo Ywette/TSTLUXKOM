@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "./stylings/layout.css";
+import "./stylings/SatelliteScene.css";
 import { Header } from "@/components/Header";
-import SatelliteScene from "@/components/SatelliteScene";
-import OrbitCircles from '@/components/ui/OrbitCircles.jsx';
+import ClientWrapper from "@/components/ClientWrapper";
 // import Footer from "@/components/Footer";
 
 const inter = Inter({
@@ -35,8 +35,7 @@ export default function RootLayout({
           flexDirection: 'column'
         }}
       >
-        <OrbitCircles />
-        <SatelliteScene />
+        <ClientWrapper />
         <div className="sticky-header">
           <Header />
         </div>

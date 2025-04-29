@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Satellite, Wifi, Globe, Shield, Rocket, Antenna, Signal, Network } from 'lucide-react';
+import { Satellite, Globe, Shield, Rocket, Antenna, Signal, Network } from 'lucide-react';
 import Link from 'next/link';
 import Button from '../components/ui/Button';
 

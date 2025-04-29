@@ -8,14 +8,15 @@ export async function generateStaticParams() {
   }))
 }
 
-// Add type definition for params
-type Props = {
-  params: {
-    serviceName: string
-  }
+type PageParams = {
+  serviceName: string
 }
 
-export default async function ServicePage({ params }: Props) {
+export default function ServicePage({
+  params,
+}: {
+  params: PageParams
+}) {
   const serviceName = params.serviceName
   
   const service = services.find(s => s.web === serviceName)

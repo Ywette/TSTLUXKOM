@@ -1,24 +1,23 @@
 "use client";
-import { ChevronDown, Satellite, Wifi, Globe, Shield, Menu, X } from "lucide-react";
+import { ChevronDown, Satellite, Globe, Shield, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from 'next/link';
 import { useEffect, useState } from "react";
 import { services } from '@/data/services';
 import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
-import '../app/stylings/Header.css';
+import '@/app/stylings/Header.css';
 
 export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const router = useRouter()
     const pathname = usePathname()
     const isProd = process.env.NODE_ENV === 'production';
-    const basePath = isProd ? '/TSTLUXKOM' : '';
+    const basePath = isProd ? '/tst-web-app' : '';
 
     // Map icons to services
     const serviceIcons = {
         'satcom': Satellite,
-        'connectivity': Wifi,
         'consulting': Globe,
         'security': Shield
     };

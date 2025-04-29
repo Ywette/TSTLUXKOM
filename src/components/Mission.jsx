@@ -6,7 +6,6 @@ import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from '@react-spring/web';
 import { usePathname } from 'next/navigation';
 import '../app/stylings/Mission.css';
-import WifiAnimation from './ui/WiFiAnimation';
 
 const AnimatedText = ({ text }) => {
   return (
@@ -65,15 +64,6 @@ export function Mission() {
 
   return (
     <section id="about" className="mission-section" ref={ref}>
-      {inView && (
-        <WifiAnimation 
-          color="#FF69B4"
-          thickness={1}
-          arcCount={12}
-          threshold={0.2}
-          triggerOnce={true}
-        />
-      )}
       <div className="mission-container">
         <div className="mission-content">
           {/* Company History Card */}

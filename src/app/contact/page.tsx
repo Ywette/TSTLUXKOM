@@ -44,7 +44,6 @@ const ContactForm = () => {
   // Service icon mapping
   const serviceIcons = {
     'satcom': Satellite,
-    'connectivity': Wifi,
     'consulting': Globe,
     'security': Shield
   };

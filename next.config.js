@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const isProd = process.env.NODE_ENV === 'production';
-const basePath = isProd ? '/TSTLUXKOM' : '';
+const basePath = isProd ? '/tst-web-app' : '';
 
 /**
  * Next.js configuration optimized for both development and production
@@ -37,9 +37,8 @@ const nextConfig = {
         return config;
     },
 
-    // Ensure static files are copied
+    // Build configuration
     distDir: 'out',
-    optimizeFonts: false,
     compress: true,
     poweredByHeader: false,
     reactStrictMode: true,
