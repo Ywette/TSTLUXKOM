@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 100">
+  <!-- Logo Group -->
+  <g transform="translate(10, 10)">
+    <!-- Large Dot -->
+    <circle cx="25" cy="40" r="20" fill="black"/>
+    
+    <!-- Thick Diagonal Stripes -->
+    <!-- Each stripe is created using a rectangle that's rotated -->
+    <rect x="60" y="0" width="35" height="80" 
+          transform="rotate(-67, 60, 40)" 
+          fill="black"/>
+    
+    <rect x="110" y="0" width="35" height="80" 
+          transform="rotate(-67, 110, 40)" 
+          fill="black"/>
+  </g>
+  
+  <!-- Text "TST LUXKOM" -->
+  <text x="200" y="60" font-family="Arial, sans-serif" font-weight="900" font-size="48" fill="black">
+    TST LUXKOM
+  </text>
+</svg>
