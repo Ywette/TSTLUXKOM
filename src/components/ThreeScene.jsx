@@ -2,7 +2,6 @@
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
-import { Suspense, useEffect, useState } from 'react';
 import '../app/stylings/SatelliteScene.css';
 
 function SceneContent() {
@@ -21,16 +20,6 @@ function SceneContent() {
 }
 
 export default function ThreeScene() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
   return (
     <div className="satellite-scene">
       <Canvas
@@ -38,9 +27,7 @@ export default function ThreeScene() {
         style={{ background: 'transparent', width: '100%', height: '100%' }}
         dpr={[1, 2]}
       >
-        <Suspense fallback={null}>
-          <SceneContent />
-        </Suspense>
+        <SceneContent />
       </Canvas>
     </div>
   );

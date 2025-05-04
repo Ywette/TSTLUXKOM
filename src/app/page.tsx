@@ -5,10 +5,10 @@ import { ServicesList } from '@/components/ServicesList.jsx';
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full">
-      <main className="container flex flex-col w-full">
+    <div>
+      <main>
         <HeroSection />
-        <Mission />
+        {/* <Mission /> */}
         <ServicesList />
         {/* <ServicesSection /> */}
         <Partners />

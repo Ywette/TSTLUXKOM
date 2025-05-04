@@ -2,10 +2,8 @@
 
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Satellite, Globe, Shield, Rocket, Antenna, Signal, Network } from 'lucide-react';
 import Link from 'next/link';
 import Button from '../components/ui/Button';
-
 import '../app/stylings/HeroSection.css';
 
 export default function HeroSection() {
@@ -71,7 +69,9 @@ At TST LUXKOM, we specialize in delivering seamless, reliable, and high-performa
               transition={{ delay: 0.9, duration: 0.8 }}
             >
               <Link href="#services">
-                <Button onClick={(e) => {
+                <Button 
+                className="button"
+                onClick={(e) => {
                   e.preventDefault();
                   document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
                 }}>
@@ -79,7 +79,7 @@ At TST LUXKOM, we specialize in delivering seamless, reliable, and high-performa
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button className="secondary-button">
+                <Button className="secondary-button button">
                   Tell About Your Project
                 </Button>
               </Link>

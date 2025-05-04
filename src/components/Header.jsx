@@ -1,66 +1,14 @@
 "use client";
-import { ChevronDown, Satellite, Globe, Shield, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
-import Link from 'next/link';
-import { useEffect, useState } from "react";
-import { services } from '@/data/services';
-import { useRouter } from 'next/navigation'
-import { usePathname } from 'next/navigation'
+import { useState } from "react";
+import Navigation from "../components/ui/Navigation"; // <- New import
 import '@/app/stylings/Header.css';
 
 export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const router = useRouter()
-    const pathname = usePathname()
     const isProd = process.env.NODE_ENV === 'production';
     const basePath = isProd ? '/tst-web-app' : '';
-
-    // Map icons to services
-    const serviceIcons = {
-        'satcom': Satellite,
-        'consulting': Globe,
-        'security': Shield
-    };
-
-    const navItems = {
-        'Home': '/',
-        'Services': '/#services',
-        'About': '/#about',
-        'Contact': '/contact'
-    }
-
-    // Close mobile menu when route changes
-    useEffect(() => {
-        setIsMobileMenuOpen(false);
-    }, [pathname]);
-
-    // Close mobile menu when screen size increases
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth > 768) {
-                setIsMobileMenuOpen(false);
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    // Handle navigation with smooth scroll
-    const handleNavClick = (e, path) => {
-        e.preventDefault();
-        setIsMobileMenuOpen(false);
-        
-        if (path.startsWith('/#')) {
-            const sectionId = path.substring(2);
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        } else {
-            router.push(path);
-        }
-    };
 
     return (
         <>
@@ -93,21 +41,10 @@ export function Header() {
                         </button>
 
                         {/* Navigation section */}
-                        <nav className={`nav-menu ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
-                            <ul className="nav-list">
-                                {Object.entries(navItems).map(([name, path], index) => (
-                                    <li key={index}>
-                                        <Link
-                                            href={path}
-                                            className="nav-link services-button"
-                                            onClick={(e) => handleNavClick(e, path)}
-                                        >
-                                            {name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </nav>
+                        <Navigation 
+                            isMobileMenuOpen={isMobileMenuOpen}
+                            setIsMobileMenuOpen={setIsMobileMenuOpen}
+                        />
                     </div>
                 </header>
             </div>
@@ -123,58 +60,3 @@ export function Header() {
         </>
     );
 }
-
-// Add this CSS to your Header.css file:
-/*
-.mobile-menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 40;
-}
-
-@media (min-width: 769px) {
-    .mobile-menu-button {
-        display: none;
-    }
-
-    .nav-menu {
-        display: flex;
-    }
-}
-
-@media (max-width: 768px) {
-    .nav-menu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: white;
-        z-index: 50;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-
-    .mobile-menu-open {
-        display: block;
-    }
-
-    .nav-list {
-        flex-direction: column;
-        padding: 1rem 0;
-    }
-
-    .nav-list li {
-        width: 100%;
-    }
-
-    .nav-link, .services-button {
-        width: 100%;
-        padding: 0.75rem 1.5rem;
-        text-align: left;
-    }
-}
-*/

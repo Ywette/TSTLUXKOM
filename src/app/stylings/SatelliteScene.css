@@ -7,7 +7,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1; /* Place it behind other content */
+  z-index: 0; /* Place it behind other content, but above background */
   pointer-events: none; /* Allow clicks to pass through to content below */
 }
 
@@ -25,11 +25,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(37, 99, 235, 0.15) 0%,
-    rgba(147, 51, 234, 0.15) 100%
-  );
+  background-color: var(--bg-primary);
   background-size: 200% 200%;
   animation: gradient-move 15s ease infinite;
   z-index: -1;
@@ -56,7 +52,7 @@ body {
   width: 100%;
   font-family: 'Poppins', sans-serif;
   color: var(--text-on-dark);
-  background-color: var(--primary-color);
+  background: transparent;
   overflow-x: hidden;
   position: relative;
 }
