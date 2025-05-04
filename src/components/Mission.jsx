@@ -30,15 +30,15 @@ export default function About() {
   return (
     <section id="about" className="about-section">
       <div className="about-container">
-        <h2 className="about-title" data-aos="fade-up">
-          About TST LUXKOM
-        </h2>
-        <p
+        <h2
           className="about-gradient"
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          Mission. Vision. Values.
+          TST LUXKOM
+        </h2>
+        <p>
+          Company in SATCOM market for over 10 years. Little description about achieved things and remaining mission, vision and values:
         </p>
         <div className="about-grid">
           {aboutData.map(({ icon, title, text }, idx) => (
@@ -48,8 +48,10 @@ export default function About() {
               data-aos-delay={200 + idx * 100}
               key={title}
             >
-              <div className="mb-4">{icon}</div>
-              <h3>{title}</h3>
+              <div className="about-card-title-container">
+                {/* <span className="about-card-icon">{icon}</span> */}
+                <h3 className="about-card-title">{title}</h3>
+              </div>
               <p>{text}</p>
             </article>
           ))}

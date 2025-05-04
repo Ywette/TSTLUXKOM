@@ -1,26 +1,25 @@
 .hero-section {
-  /* position: relative; */
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   display: flex;
   overflow: hidden;
   padding: 0 10%;
   justify-content: center;
   align-items: center;
+  background: transparent;
 }
 
 .hero-container {
-  z-index: 10;  
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .hero-content-wrapper {
   
 }
 
-
 .hero-content {
-  /* position: relative; */
   width: 100%;
-  z-index: 10;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -144,11 +143,12 @@
 /* Mobile size responsive adjustments */
 @media (max-width: 480px) {
   .hero-section {
-    /* padding-right: 10%; */
+    height: 100vh;
+    padding: 0 1rem;
   }
 
   .hero-content-wrapper {
-    /* margin-right: 20%; */
+    width: 100%;
   }
 
   .hero-content {

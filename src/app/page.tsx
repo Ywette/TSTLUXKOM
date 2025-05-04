@@ -8,7 +8,7 @@ export default function Home() {
     <div>
       <main>
         <HeroSection />
-        {/* <Mission /> */}
+        <Mission />
         <ServicesList />
         {/* <ServicesSection /> */}
         <Partners />
