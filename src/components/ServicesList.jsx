@@ -55,7 +55,7 @@ export function ServicesList() {
     <section id="services" className="services-section">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Our Services</h2>
+          <h2 className="section-gradient">Our Services</h2>
         </div>
 
         <div className="stacked-services" style={{ height: maxHeight }}>

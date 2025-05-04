@@ -31,7 +31,7 @@ export default function About() {
     <section id="about" className="about-section">
       <div className="about-container">
         <h2
-          className="about-gradient"
+          className="section-gradient"
           data-aos="fade-up"
           data-aos-delay="100"
         >
