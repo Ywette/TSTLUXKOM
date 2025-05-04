@@ -32,7 +32,7 @@
   font-size: 2rem;
   font-weight: 500;
   line-height: 1.2;
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
   color: #ffffff;
 }
 
@@ -46,7 +46,7 @@
 .hero-description {
   font-size: 1rem;
   line-height: 1.6;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   color: rgba(255, 255, 255, 0.9);
   width: 100%;
 }
@@ -56,7 +56,7 @@
   flex-direction: column;
   gap: 0.7rem;
   align-items: stretch;
-  width: 100%;
+  /* width: 100%; */
   /* padding: 0 1rem; */
 }
 
@@ -90,6 +90,31 @@
   border: 1px solid var(--accent-highlight-color, #3b82f6);
   color: var(--accent-highlight-color, #3b82f6);
 }
+
+@media (min-width: 932px) {
+  .hero-section {
+    padding: 0;
+    margin:0;
+  }
+
+  .hero-description {
+    margin-bottom: 2rem;
+  }
+
+  .hero-title {
+    margin-bottom: 1.5rem;
+  }
+  .hero-buttons {
+    flex-direction: row;
+    gap: 1rem;    
+    padding: 0;
+    margin:0;
+  }
+}
+
+
+
+
 
 /* Laptop size responsive adjustments */
 /* @media (max-width: 1024px) {

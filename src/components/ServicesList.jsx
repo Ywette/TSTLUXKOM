@@ -3,7 +3,7 @@
 import React from 'react';
 import { services } from '@/data/services';
 import { Cog, BarChart3, HeadphonesIcon, Code } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import '../app/stylings/ServicesList.css';
 
 const getIconForService = (serviceId) => {
@@ -24,29 +24,7 @@ const getIconForService = (serviceId) => {
 
 export function ServicesList() {
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [maxHeight, setMaxHeight] = useState(0);
   const cardRefs = useRef([]);
-
-  useEffect(() => {
-    // Reset refs array
-    cardRefs.current = cardRefs.current.slice(0, services.length);
-    
-    // Calculate max height from all cards
-    const calculateMaxHeight = () => {
-      const heights = cardRefs.current
-        .filter(ref => ref) // Filter out null refs
-        .map(ref => ref.scrollHeight);
-      const newMaxHeight = Math.max(...heights);
-      if (newMaxHeight !== maxHeight) {
-        setMaxHeight(newMaxHeight);
-      }
-    };
-
-    calculateMaxHeight();
-    // Recalculate on window resize
-    window.addEventListener('resize', calculateMaxHeight);
-    return () => window.removeEventListener('resize', calculateMaxHeight);
-  }, []);
 
   const nonHovered = services.filter((s) => s.id !== hoveredCard);
   const hovered = services.find((s) => s.id === hoveredCard);
@@ -58,14 +36,13 @@ export function ServicesList() {
           <h2 className="section-gradient">Our Services</h2>
         </div>
 
-        <div className="stacked-services" style={{ height: maxHeight }}>
+        <div className="stacked-services">
           {nonHovered.map((service, index) => (
             <ServiceCard
               key={service.id}
               service={service}
               setHoveredCard={setHoveredCard}
               ref={el => cardRefs.current[index] = el}
-              height={maxHeight}
             />
           ))}
           {hovered && (
@@ -74,7 +51,6 @@ export function ServicesList() {
               service={hovered}
               setHoveredCard={setHoveredCard}
               ref={el => cardRefs.current[services.findIndex(s => s.id === hovered.id)] = el}
-              height={maxHeight}
             />
           )}
         </div>
@@ -83,14 +59,13 @@ export function ServicesList() {
   );
 }
 
-const ServiceCard = React.forwardRef(({ service, setHoveredCard, height }, ref) => {
+const ServiceCard = React.forwardRef(({ service, setHoveredCard }, ref) => {
   return (
     <div
       ref={ref}
       className="service-card"
       style={{ 
-        left: `${5 + 23 * (parseInt(service.id) - 1)}%`,
-        height: height ? `${height}px` : 'auto'
+        left: `${5 + 23 * (parseInt(service.id) - 1)}%`
       }}
       onMouseEnter={() => setHoveredCard(service.id)}
       onMouseLeave={() => setHoveredCard(null)}

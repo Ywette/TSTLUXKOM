@@ -3,10 +3,6 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Loop } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/autoplay';
 import '../app/stylings/Partners.css';
 
 const partners = [
@@ -49,18 +45,18 @@ const partners = [
 
 export default function Partners() {
   return (
-    <div className="partners-wrapper" id="partners">
+    <section className="partners-wrapper" id="partners">
       <div className="partners-container">
         <h2 className="partners-title">Our Partners</h2>
         <div className="wrapper">
           <div className="partners-row">
             {[...partners, ...partners].map((partner, index) => (
               <Link
-                key={index}
+                key={`${partner.key}-${index}`}
                 href={partner.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`partner-item item item${(index % partners.length) + 1}`}
+                className="partner-item"
                 style={{ backgroundColor: partner.bgColor }}
               >
                 <div className="partner-image-container">
@@ -79,6 +75,6 @@ export default function Partners() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
