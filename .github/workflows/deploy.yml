@@ -43,11 +43,17 @@ jobs:
         
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
+        
+- name: Upload artifact (manual fallback)
+  uses: actions/upload-artifact@v3
+  with:
+    name: github-pages
+    path: ./out
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: './out'
+      # - name: Upload artifact
+      #   uses: actions/upload-pages-artifact@v2
+      #   with:
+      #     path: './out'
 
       - name: Deploy to GitHub Pages
         id: deployment
