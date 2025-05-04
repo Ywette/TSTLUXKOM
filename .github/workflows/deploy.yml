@@ -44,13 +44,6 @@ jobs:
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
 
-      # Uncomment if you want to upload an artifact
-      - name: Upload artifact (manual fallback)
-        uses: actions/upload-artifact@v3
-        with:
-          name: github-pages
-          path: ./out
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
