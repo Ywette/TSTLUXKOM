@@ -40,10 +40,17 @@ jobs:
         
       - name: Build
         run: npm run build
-        
+
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
 
+      # Upload build output as an artifact
+      - name: Upload build output
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./out
+
+      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
