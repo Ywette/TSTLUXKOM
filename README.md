@@ -2,7 +2,7 @@
 
 Live web [Next.js]([https://nextjs.org](https://ywette.github.io/TSTLUXKOM/) 
 
-## BASIC INITIAL PLAN (CREATED WITH CLAUDE)
+## BASIC INITIAL PLAN (CREATED WITH CLAUDE) hmmm
 
 Week 1: Core Development
 - Project setup with Next.js, TypeScript, Tailwind
